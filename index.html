@@ -261,12 +261,9 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
   width: 48px; height: 48px; border-radius: var(--radius-md);
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 0;
 }
-.step h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
-.step p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
-
-/* ── WHAT YOU GET ────────────────────────────────────────────────── */
+.step-icon svg { width: 24px; height: 24px; }
 .offers-bg { background: var(--navy); }
 .offers-grid {
   display: grid; grid-template-columns: 1fr 1fr;
@@ -284,7 +281,11 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
   background: rgba(255,255,255,0.09);
   border-color: rgba(37,137,212,0.4);
 }
-.offer-card .ico { font-size: 32px; margin-bottom: 16px; }
+.offer-card .ico {
+  width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px; border-radius: 16px; background: rgba(255,255,255,0.12); color: var(--white);
+}
+.offer-card .ico svg { width: 24px; height: 24px; }
 .offer-card h3 { font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
 .offer-card p  { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; }
 .offer-card ul { list-style: none; margin-top: 14px; }
@@ -341,7 +342,11 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
   border-color: var(--sky);
   box-shadow: var(--shadow-sm);
 }
-.eligibility-card .check { font-size: 22px; margin-bottom: 14px; }
+.eligibility-card .check {
+  width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px; border-radius: 14px; background: var(--sky); color: var(--white);
+}
+.eligibility-card .check svg { width: 22px; height: 22px; }
 .eligibility-card h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
 .eligibility-card p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
 
@@ -371,18 +376,20 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
   border-radius: var(--radius-lg);
   padding: 28px;
 }
-.ceo-avatar {
-  width: 72px; height: 72px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--sky), var(--blue));
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display); font-size: 28px; color: var(--white);
-  margin-bottom: 16px;
+.ceo-photo {
+  width: 100%; height: auto; border-radius: var(--radius-lg); object-fit: cover; margin-bottom: 20px;
 }
 .ceo-card h4 { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.ceo-card h4 a { color: inherit; text-decoration: none; }
 .ceo-card .title { font-size: 12px; color: rgba(255,255,255,0.5); font-family: var(--font-mono); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em; }
 .ceo-card p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.7; }
+.profile-link {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 18px;
+  font-size: 13px; color: rgba(255,255,255,0.7); text-decoration: none;
+}
+.profile-link svg { width: 14px; height: 14px; }
+.profile-link:hover { color: #FFFFFF; }
 
-/* ── FORM ─────────────────────────────────────────────────────────── */
 .form-section { background: var(--white); }
 .form-wrapper {
   max-width: 680px; margin: 0 auto;
@@ -435,15 +442,13 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
 }
 .form-submit:hover { background: var(--blue); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(11,31,58,0.2); }
 .form-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 16px; }
-
-/* Success state */
+.form-success .check-circle { width: 64px; height: 64px; border-radius: 50%;
+  background: var(--lime); display: flex; align-items: center;
+  justify-content: center; margin: 0 auto 20px; font-size: 0;
+}
+.form-success .check-circle svg { width: 28px; height: 28px; color: var(--navy); }
 .form-success {
   display: none; text-align: center; padding: 40px 20px;
-}
-.form-success .check-circle {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: var(--lime); display: flex; align-items: center;
-  justify-content: center; margin: 0 auto 20px; font-size: 28px;
 }
 .form-success h3 { font-family: var(--font-display); font-size: 26px; color: var(--navy); margin-bottom: 8px; }
 .form-success p { font-size: 15px; color: var(--muted); }
@@ -538,7 +543,13 @@ footer {
   <div class="container">
     <div class="hero-content">
       <div class="hero-tag">
-        <span class="tag tag-blue">🇳🇬 Operating in Southwest Nigeria</span>
+        <span class="tag tag-blue">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:6px;">
+            <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="9" r="2.5" fill="currentColor"/>
+          </svg>
+          Operating in Southwest Nigeria
+        </span>
       </div>
       <h1>A Computer Lab<br/>in Your School.<br/><em>At Zero Cost.</em></h1>
       <p class="hero-desc">
@@ -619,37 +630,72 @@ footer {
     <div class="steps-grid reveal">
       <div class="step">
         <span class="step-num">01</span>
-        <div class="step-icon" style="background:#EBF5FF;">🏫</div>
+        <div class="step-icon" style="background:#EBF5FF;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 10l8-6 8 6v10a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1V10Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <h3>We Find Your School</h3>
         <p>We identify private primary or secondary schools without a functional ICT lab. You apply — we review your school profile and schedule a free visit.</p>
       </div>
       <div class="step">
         <span class="step-num">02</span>
-        <div class="step-icon" style="background:#D4F5E9;">🤝</div>
+        <div class="step-icon" style="background:#D4F5E9;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.5 12.5c1.1 1.1 2.3 1.5 3.8 1.5 1.5 0 2.7-.4 3.8-1.5l1.4 1.4c-1.4 1.4-3.1 2.1-5.2 2.1-2 0-3.8-.8-5.2-2.1l1.4-1.4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18.5 11.5c-1.1-1.1-2.3-1.5-3.8-1.5-1.5 0-2.7.4-3.8 1.5l-1.4-1.4c1.4-1.4 3.1-2.1 5.2-2.1 2 0 3.8.8 5.2 2.1l-1.4 1.4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8.5 15.5l7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <h3>We Sign a BOT Agreement</h3>
         <p>You provide one room and mains power. We bring everything else — computers, UPS backup, networking, projector, and software. The lab is up in 30 days.</p>
       </div>
       <div class="step">
         <span class="step-num">03</span>
-        <div class="step-icon" style="background:#FEF3C7;">💻</div>
+        <div class="step-icon" style="background:#FEF3C7;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M7 6v-2h10v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M8 18h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3>Your School Uses the Lab Freely</h3>
         <p>The lab belongs to EduLab — but your school can use the systems for any school activity during non-training hours. It becomes your school's ICT facility.</p>
       </div>
       <div class="step">
         <span class="step-num">04</span>
-        <div class="step-icon" style="background:#EBF5FF;">📚</div>
+        <div class="step-icon" style="background:#EBF5FF;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 6h12v12H6V6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M6 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M9 12v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3>We Train Your Students</h3>
         <p>Our certified instructors deliver 2 hours of structured tech training per class weekly — covering digital skills, AI, and intensive CBT exam practice for JAMB, WAEC, and NECO.</p>
       </div>
       <div class="step">
         <span class="step-num">05</span>
-        <div class="step-icon" style="background:#D4F5E9;">💰</div>
+        <div class="step-icon" style="background:#D4F5E9;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="7" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M12 7v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M9 9h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M9 15h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3>Students Pay a Small Term Fee</h3>
         <p>Students pay ₦10,000 per term — a fraction of any textbook bundle. That fee is our revenue. You pay nothing. Your school gets a fully-equipped lab and trained students.</p>
       </div>
       <div class="step">
         <span class="step-num">06</span>
-        <div class="step-icon" style="background:#FEF3C7;">🚀</div>
+        <div class="step-icon" style="background:#FEF3C7;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 16l-2 6 6-2 8-14-6 2-6 8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M13 11l6-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3>Your Students Gain a Real Edge</h3>
         <p>By SS2, EduLab students have built real AI/ML projects, practised hundreds of CBT exam questions, and earned a verified digital skills certificate. That is a career head-start.</p>
       </div>
@@ -667,7 +713,13 @@ footer {
     </div>
     <div class="offers-grid reveal">
       <div class="offer-card">
-        <div class="ico">🖥️</div>
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="5" width="16" height="11" rx="2" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M8 19h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M12 16v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3>A Fully-Equipped ICT Lab</h3>
         <p>EduLab installs and owns everything. You provide the room — we provide the rest.</p>
         <ul>
@@ -679,7 +731,13 @@ footer {
         </ul>
       </div>
       <div class="offer-card">
-        <div class="ico">🎓</div>
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9l9-4 9 4-9 4-9-4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M12 13v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M7 18h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3>Expert-Led Student Training</h3>
         <p>A certified EduLab instructor teaches your students every week of the term.</p>
         <ul>
@@ -691,7 +749,13 @@ footer {
         </ul>
       </div>
       <div class="offer-card">
-        <div class="ico">🏆</div>
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 6h8l1.5 4H6.5L8 6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M8.5 10.5v3a3.5 3.5 0 0 0 7 0v-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 19v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3>School Recognition & Visibility</h3>
         <p>EduLab partner schools become recognised as tech-forward institutions in their state.</p>
         <ul>
@@ -702,7 +766,12 @@ footer {
         </ul>
       </div>
       <div class="offer-card">
-        <div class="ico">📈</div>
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 15l4-4 3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 19h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3>Competitive Enrolment Advantage</h3>
         <p>Parents choose schools that prepare children for the future. EduLab makes you that school.</p>
         <ul>
@@ -794,32 +863,64 @@ footer {
     </div>
     <div class="eligibility-grid reveal">
       <div class="eligibility-card">
-        <div class="check">🏫</div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 10l8-6 8 6v10a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1V10Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <h3>Private School</h3>
         <p>Any registered private primary or secondary school — or a combined primary/secondary school — is eligible to apply.</p>
       </div>
       <div class="eligibility-card">
-        <div class="check">👥</div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M17 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3>Minimum 100 Students</h3>
         <p>Your school should have at least 100 enrolled students to make the programme financially viable for both parties.</p>
       </div>
       <div class="eligibility-card">
-        <div class="check">🚫</div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M8 8l8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3>No Functional ICT Lab</h3>
         <p>Schools without a working computer lab are our priority. If you have one, we can still discuss a curriculum-only partnership.</p>
       </div>
       <div class="eligibility-card">
-        <div class="check">🔌</div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 2h4v6h-4V2Z" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M9 8h6l-1 5h-4l-1-5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M8 13h8v7H8v-7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <h3>A Spare Room + Power</h3>
         <p>You need one dedicated room of at least 40sqm and a stable mains power connection. We handle everything else.</p>
       </div>
       <div class="eligibility-card">
-        <div class="check">📍</div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21s7-4.5 7-10a7 7 0 1 0-14 0c0 5.5 7 10 7 10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <circle cx="12" cy="9" r="2" fill="currentColor"/>
+          </svg>
+        </div>
         <h3>Ondo or Osun State</h3>
         <p>We are currently deploying in Ondo and Osun States. Schools in other Southwest states can join the waitlist.</p>
       </div>
       <div class="eligibility-card">
-        <div class="check">✅</div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22c5-1 8-6 8-11V5l-8-3-8 3v6c0 5 3 10 8 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <h3>Committed Proprietor</h3>
         <p>A 3-year BOT partnership requires buy-in from the school proprietor or principal. It is a long-term commitment — and the benefits compound over time.</p>
       </div>
@@ -843,10 +944,19 @@ footer {
       </div>
       <div>
         <div class="ceo-card">
-          <div class="ceo-avatar">S</div>
-          <h4>Sharafdeen Quadri Olalekan</h4>
+          <img src="pp.jpg" alt="Sharafdeen Quadri Olalekan" class="ceo-photo"/>
+          <h4><a href="https://quaddev.onrender.com" target="_blank" rel="noopener noreferrer">Sharafdeen Quadri Olalekan</a></h4>
           <div class="title">Founder & CEO</div>
           <p>Full-stack developer, technology educator, and Branch Manager at N-TECH Info Systems Ltd. with 3+ years training students in Ondo and Osun States. Architect of N-TECH's school partnership curriculum and CBT preparation programme.</p>
+          <a class="profile-link" href="https://quaddev.onrender.com" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 14l6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10 8h4v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 16h2a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 16h-2a2 2 0 0 1-2-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            quaddev.onrender.com
+          </a>
         </div>
       </div>
     </div>
@@ -857,7 +967,15 @@ footer {
 <section class="section form-section" id="apply">
   <div class="container">
     <div class="form-wrapper reveal">
-      <span class="tag tag-blue" style="margin-bottom:20px;display:inline-flex;">📋 School Partnership Application</span>
+      <span class="tag tag-blue" style="margin-bottom:20px;display:inline-flex; align-items:center; gap:8px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 4h9v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="5" y="6" width="12" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M9 10h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M9 14h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        School Partnership Application
+      </span>
       <h2 class="form-title">Apply to Partner<br/>With EduLab</h2>
       <p class="form-sub">Fill in the form below. Our team will review your school profile and contact you within 5 working days to schedule a free school visit.</p>
 
@@ -930,11 +1048,21 @@ footer {
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Submit Application
         </button>
-        <p class="form-note">🔒 Your information is confidential and will only be used to assess your school's partnership eligibility.</p>
+        <p class="form-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:6px;">
+            <rect x="7" y="11" width="10" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          Your information is confidential and will only be used to assess your school's partnership eligibility.
+        </p>
       </div>
 
       <div class="form-success" id="form-success">
-        <div class="check-circle">✅</div>
+        <div class="check-circle">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <h3>Application Received!</h3>
         <p>Thank you for applying. Our team will review your school profile and reach out within 5 working days to schedule a free visit.</p>
         <p style="margin-top:12px; font-size:13px; color:var(--muted);">Questions? Email us at <strong>olalekanquadri58@gmail.com</strong></p>
