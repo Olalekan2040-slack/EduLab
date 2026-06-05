@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EduLab Nigeria — Computer Labs in Every School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ── Reset & Variables ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:   #0B1F3A;
+  --blue:   #1464A0;
+  --sky:    #2589D4;
+  --ice:    #E8F3FC;
+  --green:  #0F7B55;
+  --lime:   #D4F5E9;
+  --amber:  #D97706;
+  --cream:  #FAFAF7;
+  --dark:   #0D1117;
+  --mid:    #374151;
+  --muted:  #6B7280;
+  --border: #E2EAF2;
+  --white:  #FFFFFF;
+
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body:    'Sora', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+
+  --shadow-sm: 0 2px 8px rgba(11,31,58,0.07);
+  --shadow-md: 0 8px 32px rgba(11,31,58,0.12);
+  --shadow-lg: 0 24px 64px rgba(11,31,58,0.16);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Utility ─────────────────────────────────────────────────────── */
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 99px;
+}
+.tag-blue  { background: var(--ice);  color: var(--blue); border: 1px solid #C5DCF0; }
+.tag-green { background: var(--lime); color: var(--green); border: 1px solid #A7EDD5; }
+.tag-amber { background: #FEF3C7; color: var(--amber); border: 1px solid #FDE68A; }
+
+/* ── NAV ─────────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(250,250,247,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: var(--shadow-sm); }
+
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px; max-width: 1120px; margin: 0 auto;
+}
+
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.logo-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.logo-mark svg { width: 20px; height: 20px; }
+.logo-text { font-size: 16px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; }
+.logo-text span { color: var(--sky); }
+
+.nav-links {
+  display: flex; align-items: center; gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--mid);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--navy); }
+
+.nav-cta {
+  background: var(--navy); color: var(--white) !important;
+  padding: 10px 20px; border-radius: var(--radius-md);
+  font-size: 13px !important; font-weight: 600 !important;
+  transition: background 0.2s, transform 0.15s !important;
+  text-decoration: none;
+}
+.nav-cta:hover { background: var(--blue) !important; transform: translateY(-1px); }
+
+/* ── HERO ─────────────────────────────────────────────────────────── */
+.hero {
+  padding: 140px 0 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(20,100,160,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 10% 80%, rgba(15,123,85,0.06) 0%, transparent 60%);
+}
+
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0; opacity: 0.4;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+.hero-content {
+  position: relative; z-index: 1;
+  max-width: 720px;
+}
+
+.hero-tag { margin-bottom: 24px; animation: fadeUp 0.6s ease both; }
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 68px);
+  line-height: 1.08;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--sky);
+  position: relative;
+  display: inline-block;
+}
+.hero h1 em::after {
+  content: '';
+  position: absolute; bottom: 4px; left: 0; right: 0;
+  height: 3px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--sky), transparent);
+}
+
+.hero-desc {
+  font-size: 18px; color: var(--mid); line-height: 1.7;
+  max-width: 560px; margin-bottom: 40px;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--navy); color: var(--white);
+  padding: 14px 28px; border-radius: var(--radius-md);
+  font-size: 15px; font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(11,31,58,0.2);
+}
+.btn-primary:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(20,100,160,0.3); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--navy);
+  padding: 14px 24px; border-radius: var(--radius-md);
+  font-size: 15px; font-weight: 500;
+  text-decoration: none; border: 1.5px solid var(--border);
+  transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: var(--sky); color: var(--sky); background: var(--ice); }
+
+.hero-stats {
+  display: flex; gap: 48px; margin-top: 64px; flex-wrap: wrap;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+.stat-item {}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 36px; color: var(--navy); line-height: 1;
+}
+.stat-num span { color: var(--sky); }
+.stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+/* ── MARQUEE ─────────────────────────────────────────────────────── */
+.marquee-strip {
+  padding: 16px 0; background: var(--navy);
+  overflow: hidden; position: relative;
+}
+.marquee-track {
+  display: flex; gap: 0;
+  animation: marquee 22s linear infinite;
+  white-space: nowrap;
+}
+.marquee-track span {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,0.6); padding: 0 32px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.marquee-track span.accent { color: var(--sky); }
+
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── HOW IT WORKS ────────────────────────────────────────────────── */
+.section { padding: 96px 0; }
+.section-head { text-align: center; margin-bottom: 64px; }
+.section-head .tag { margin-bottom: 16px; }
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  color: var(--navy); line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.section-head p { font-size: 17px; color: var(--muted); max-width: 520px; margin: 0 auto; }
+
+.steps-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2px;
+  background: var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.step {
+  background: var(--white);
+  padding: 36px 28px;
+  transition: background 0.2s;
+  position: relative;
+}
+.step:hover { background: var(--ice); }
+.step-num {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  color: var(--sky); letter-spacing: 0.1em;
+  margin-bottom: 16px; display: block;
+}
+.step-icon {
+  width: 48px; height: 48px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+.step h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.step p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+/* ── WHAT YOU GET ────────────────────────────────────────────────── */
+.offers-bg { background: var(--navy); }
+.offers-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media(max-width:680px){ .offers-grid { grid-template-columns: 1fr; } }
+.offer-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.offer-card:hover {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(37,137,212,0.4);
+}
+.offer-card .ico { font-size: 32px; margin-bottom: 16px; }
+.offer-card h3 { font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+.offer-card p  { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+.offer-card ul { list-style: none; margin-top: 14px; }
+.offer-card ul li {
+  font-size: 13px; color: rgba(255,255,255,0.65);
+  padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.offer-card ul li::before { content: "→"; color: var(--sky); flex-shrink: 0; font-family: var(--font-mono); font-size: 12px; margin-top: 1px; }
+
+/* ── CURRICULUM ──────────────────────────────────────────────────── */
+.curriculum-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+.curriculum-table th {
+  background: var(--navy); color: var(--white);
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 14px 20px; text-align: left;
+}
+.curriculum-table td {
+  padding: 14px 20px; font-size: 14px; color: var(--mid);
+  border-top: 1px solid var(--border); vertical-align: middle;
+}
+.curriculum-table tr:nth-child(even) td { background: #F8FAFD; }
+.curriculum-table tr:hover td { background: var(--ice); }
+.level-badge {
+  display: inline-block; font-family: var(--font-mono);
+  font-size: 11px; font-weight: 600; padding: 3px 8px;
+  border-radius: var(--radius-sm); background: var(--ice);
+  color: var(--blue); white-space: nowrap;
+}
+.ai-cell { color: var(--green); font-weight: 500; }
+.exam-cell { color: var(--amber); font-weight: 500; }
+
+/* ── WHO WE SERVE ────────────────────────────────────────────────── */
+.eligibility-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.eligibility-card {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  background: var(--white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.eligibility-card:hover {
+  border-color: var(--sky);
+  box-shadow: var(--shadow-sm);
+}
+.eligibility-card .check { font-size: 22px; margin-bottom: 14px; }
+.eligibility-card h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.eligibility-card p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+/* ── CEO SECTION ─────────────────────────────────────────────────── */
+.ceo-section {
+  background: linear-gradient(135deg, var(--navy) 0%, #0F2E50 100%);
+  border-radius: var(--radius-xl);
+  padding: 64px;
+  display: grid; grid-template-columns: 1fr 320px;
+  gap: 48px; align-items: center;
+}
+@media(max-width:800px){ .ceo-section { grid-template-columns: 1fr; padding: 40px 28px; } }
+.ceo-quote {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 30px);
+  color: var(--white); line-height: 1.4;
+  font-style: italic;
+}
+.ceo-quote::before { content: "\201C"; color: var(--sky); font-size: 1.4em; line-height: 0; vertical-align: -0.3em; margin-right: 4px; }
+.ceo-quote::after  { content: "\201D"; color: var(--sky); font-size: 1.4em; line-height: 0; vertical-align: -0.3em; margin-left: 4px; }
+.ceo-info { display: flex; flex-direction: column; gap: 8px; margin-top: 28px; }
+.ceo-info .ceo-name { font-size: 17px; font-weight: 700; color: var(--white); }
+.ceo-info .ceo-role { font-size: 13px; color: rgba(255,255,255,0.55); font-family: var(--font-mono); }
+.ceo-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+.ceo-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--sky), var(--blue));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 28px; color: var(--white);
+  margin-bottom: 16px;
+}
+.ceo-card h4 { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.ceo-card .title { font-size: 12px; color: rgba(255,255,255,0.5); font-family: var(--font-mono); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em; }
+.ceo-card p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.7; }
+
+/* ── FORM ─────────────────────────────────────────────────────────── */
+.form-section { background: var(--white); }
+.form-wrapper {
+  max-width: 680px; margin: 0 auto;
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 56px 48px;
+}
+@media(max-width:600px){ .form-wrapper { padding: 32px 20px; } }
+
+.form-title {
+  font-family: var(--font-display);
+  font-size: 32px; color: var(--navy);
+  margin-bottom: 8px; letter-spacing: -0.02em;
+}
+.form-sub { font-size: 15px; color: var(--muted); margin-bottom: 36px; }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:540px){ .form-grid { grid-template-columns: 1fr; } }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1/-1; }
+.form-group label { font-size: 13px; font-weight: 600; color: var(--navy); }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body); font-size: 14px;
+  color: var(--dark); background: var(--white);
+  outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--sky);
+  box-shadow: 0 0 0 3px rgba(37,137,212,0.12);
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-group select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+.form-submit {
+  width: 100%; padding: 15px;
+  background: var(--navy); color: var(--white);
+  border: none; border-radius: var(--radius-md);
+  font-family: var(--font-body); font-size: 15px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+  margin-top: 8px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.form-submit:hover { background: var(--blue); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(11,31,58,0.2); }
+.form-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 16px; }
+
+/* Success state */
+.form-success {
+  display: none; text-align: center; padding: 40px 20px;
+}
+.form-success .check-circle {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--lime); display: flex; align-items: center;
+  justify-content: center; margin: 0 auto 20px; font-size: 28px;
+}
+.form-success h3 { font-family: var(--font-display); font-size: 26px; color: var(--navy); margin-bottom: 8px; }
+.form-success p { font-size: 15px; color: var(--muted); }
+
+/* ── FOOTER ──────────────────────────────────────────────────────── */
+footer {
+  background: var(--dark);
+  padding: 64px 0 32px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+}
+@media(max-width:680px){ .footer-grid { grid-template-columns: 1fr; } }
+.footer-brand .logo { margin-bottom: 16px; }
+.footer-brand .logo-text { color: var(--white); }
+.footer-brand p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+.footer-col h4 { font-size: 13px; font-weight: 700; color: var(--white); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 16px; }
+.footer-col a { display: block; font-size: 14px; color: rgba(255,255,255,0.45); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+.footer-col a:hover { color: var(--white); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 28px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
+.footer-bottom .footer-badge {
+  font-family: var(--font-mono); font-size: 11px;
+  color: rgba(255,255,255,0.3); letter-spacing: 0.08em;
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── MOBILE NAV ──────────────────────────────────────────────────── */
+.hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); margin: 5px 0; border-radius: 2px; transition: all 0.25s; }
+@media(max-width:768px){
+  .nav-links { display: none; }
+  .hamburger { display: block; }
+  .nav-links.open {
+    display: flex; flex-direction: column; align-items: flex-start;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--cream); border-bottom: 1px solid var(--border);
+    padding: 20px 24px; gap: 16px;
+    box-shadow: var(--shadow-md);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────────────────────── -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="4" width="16" height="11" rx="2" stroke="white" stroke-width="1.5"/>
+          <path d="M7 15v2M13 15v2M5 17h10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M7 9l2 2 4-4" stroke="#7DD3FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="logo-text">EduLab<span>Nigeria</span></span>
+    </a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#schools">For Schools</a></li>
+      <li><a href="#curriculum">Curriculum</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#apply" class="nav-cta">Apply Now</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="tag tag-blue">🇳🇬 Operating in Southwest Nigeria</span>
+      </div>
+      <h1>A Computer Lab<br/>in Your School.<br/><em>At Zero Cost.</em></h1>
+      <p class="hero-desc">
+        EduLab Nigeria installs and owns fully-equipped ICT labs in private schools — free.
+        Your school uses the systems freely. We train your students in practical tech skills
+        and prepare them for JAMB, WAEC, and NECO exams. We earn a small per-student fee.
+        Everyone wins.
+      </p>
+      <div class="hero-actions">
+        <a href="#apply" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Partner With Us
+        </a>
+        <a href="#how" class="btn-secondary">
+          See How It Works
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">₦<span>0</span></div>
+          <div class="stat-label">Cost to your school</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">20<span>+</span></div>
+          <div class="stat-label">Computers per lab</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">3<span>x</span></div>
+          <div class="stat-label">Exams covered — JAMB, WAEC, NECO</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ──────────────────────────────────────────────────────── -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="accent">EduLab Nigeria</span>
+    <span>CBT Exam Preparation</span>
+    <span class="accent">·</span>
+    <span>Practical Tech Training</span>
+    <span class="accent">·</span>
+    <span>Zero Cost to Schools</span>
+    <span class="accent">·</span>
+    <span>JAMB · WAEC · NECO</span>
+    <span class="accent">·</span>
+    <span>Python · AI · Machine Learning</span>
+    <span class="accent">·</span>
+    <span>Ondo · Osun · Southwest Nigeria</span>
+    <span class="accent">·</span>
+    <!-- duplicate for seamless loop -->
+    <span class="accent">EduLab Nigeria</span>
+    <span>CBT Exam Preparation</span>
+    <span class="accent">·</span>
+    <span>Practical Tech Training</span>
+    <span class="accent">·</span>
+    <span>Zero Cost to Schools</span>
+    <span class="accent">·</span>
+    <span>JAMB · WAEC · NECO</span>
+    <span class="accent">·</span>
+    <span>Python · AI · Machine Learning</span>
+    <span class="accent">·</span>
+    <span>Ondo · Osun · Southwest Nigeria</span>
+    <span class="accent">·</span>
+  </div>
+</div>
+
+<!-- ── HOW IT WORKS ─────────────────────────────────────────────────── -->
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag tag-blue">The Model</span>
+      <h2>Simple. Sustainable.<br/>Built for Nigerian Schools.</h2>
+      <p>No capital outlay. No hidden fees. Just a genuine partnership that benefits your school, your students, and your community.</p>
+    </div>
+    <div class="steps-grid reveal">
+      <div class="step">
+        <span class="step-num">01</span>
+        <div class="step-icon" style="background:#EBF5FF;">🏫</div>
+        <h3>We Find Your School</h3>
+        <p>We identify private primary or secondary schools without a functional ICT lab. You apply — we review your school profile and schedule a free visit.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <div class="step-icon" style="background:#D4F5E9;">🤝</div>
+        <h3>We Sign a BOT Agreement</h3>
+        <p>You provide one room and mains power. We bring everything else — computers, UPS backup, networking, projector, and software. The lab is up in 30 days.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <div class="step-icon" style="background:#FEF3C7;">💻</div>
+        <h3>Your School Uses the Lab Freely</h3>
+        <p>The lab belongs to EduLab — but your school can use the systems for any school activity during non-training hours. It becomes your school's ICT facility.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <div class="step-icon" style="background:#EBF5FF;">📚</div>
+        <h3>We Train Your Students</h3>
+        <p>Our certified instructors deliver 2 hours of structured tech training per class weekly — covering digital skills, AI, and intensive CBT exam practice for JAMB, WAEC, and NECO.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">05</span>
+        <div class="step-icon" style="background:#D4F5E9;">💰</div>
+        <h3>Students Pay a Small Term Fee</h3>
+        <p>Students pay ₦10,000 per term — a fraction of any textbook bundle. That fee is our revenue. You pay nothing. Your school gets a fully-equipped lab and trained students.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">06</span>
+        <div class="step-icon" style="background:#FEF3C7;">🚀</div>
+        <h3>Your Students Gain a Real Edge</h3>
+        <p>By SS2, EduLab students have built real AI/ML projects, practised hundreds of CBT exam questions, and earned a verified digital skills certificate. That is a career head-start.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT SCHOOLS GET ─────────────────────────────────────────────── -->
+<section class="section offers-bg" id="schools">
+  <div class="container">
+    <div class="section-head reveal" style="color:white;">
+      <span class="tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.15);">For Schools</span>
+      <h2 style="color:white;">Everything Your School<br/>Gets — For Free.</h2>
+      <p style="color:rgba(255,255,255,0.55);">A complete ICT infrastructure, a trained instructor, and a curriculum that puts your school ahead of every competitor in your city.</p>
+    </div>
+    <div class="offers-grid reveal">
+      <div class="offer-card">
+        <div class="ico">🖥️</div>
+        <h3>A Fully-Equipped ICT Lab</h3>
+        <p>EduLab installs and owns everything. You provide the room — we provide the rest.</p>
+        <ul>
+          <li>20 computers (Core i5, 8GB RAM)</li>
+          <li>UPS power backup — no blackout interruptions</li>
+          <li>Local area network + projector</li>
+          <li>CBT simulation software (JAMB, WAEC, NECO)</li>
+          <li>All maintenance and repairs by EduLab</li>
+        </ul>
+      </div>
+      <div class="offer-card">
+        <div class="ico">🎓</div>
+        <h3>Expert-Led Student Training</h3>
+        <p>A certified EduLab instructor teaches your students every week of the term.</p>
+        <ul>
+          <li>2 hours per class per week — every teaching week</li>
+          <li>Structured curriculum from Primary 3 through SS2</li>
+          <li>AI and Machine Learning integrated from JSS1</li>
+          <li>JAMB/WAEC CBT mock examinations built-in</li>
+          <li>End-of-term student performance reports</li>
+        </ul>
+      </div>
+      <div class="offer-card">
+        <div class="ico">🏆</div>
+        <h3>School Recognition & Visibility</h3>
+        <p>EduLab partner schools become recognised as tech-forward institutions in their state.</p>
+        <ul>
+          <li>EduLab Partner School badge and certification</li>
+          <li>Annual inter-school tech hackathon participation</li>
+          <li>State-level media coverage for hackathon winners</li>
+          <li>Listed on the EduLab Nigeria partner school directory</li>
+        </ul>
+      </div>
+      <div class="offer-card">
+        <div class="ico">📈</div>
+        <h3>Competitive Enrolment Advantage</h3>
+        <p>Parents choose schools that prepare children for the future. EduLab makes you that school.</p>
+        <ul>
+          <li>Differentiate from schools without a functional ICT lab</li>
+          <li>Attract tech-aware, ambitious families</li>
+          <li>Improve JAMB and WAEC performance scores</li>
+          <li>First-mover advantage in your city before other schools apply</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CURRICULUM ──────────────────────────────────────────────────── -->
+<section class="section" id="curriculum" style="background:var(--cream);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag tag-green">Curriculum</span>
+      <h2>From Primary 3 to SS2.<br/>Progressive. Practical. Proven.</h2>
+      <p>Our curriculum was developed with N-TECH Info Systems Ltd. and validated through the Federal Government's 3MTT programme — the only GenAI training framework in Southwest Nigeria.</p>
+    </div>
+    <div class="reveal" style="overflow-x:auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+      <table class="curriculum-table">
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Core Course</th>
+            <th>AI / ML Track</th>
+            <th>CBT Preparation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="level-badge">Pry 3–4</span></td>
+            <td>Scratch Programming & Digital Basics</td>
+            <td class="ai-cell">AI Thinking, Sorting & Pattern Games</td>
+            <td class="exam-cell">Mouse, Keyboard, Navigation</td>
+          </tr>
+          <tr>
+            <td><span class="level-badge">Pry 5–6</span></td>
+            <td>Scratch + AI Concepts</td>
+            <td class="ai-cell">How Machines Learn (Teachable Machine)</td>
+            <td class="exam-cell">File Management, Typing Speed</td>
+          </tr>
+          <tr>
+            <td><span class="level-badge">JSS 1</span></td>
+            <td>Python (Beginner) + Web Basics</td>
+            <td class="ai-cell">Variables, Logic, ML Introduction</td>
+            <td class="exam-cell">NECO CBT Interface Practice</td>
+          </tr>
+          <tr>
+            <td><span class="level-badge">JSS 2</span></td>
+            <td>Python + Machine Learning Basics</td>
+            <td class="ai-cell">Train a Classifier with scikit-learn</td>
+            <td class="exam-cell">NECO / WAEC Mock CBT</td>
+          </tr>
+          <tr>
+            <td><span class="level-badge">JSS 3</span></td>
+            <td>Applied ML & AI Projects</td>
+            <td class="ai-cell">Linear Regression, Image Classification</td>
+            <td class="exam-cell">WAEC e-Testing Readiness</td>
+          </tr>
+          <tr>
+            <td><span class="level-badge">SS 1</span></td>
+            <td>ML, AI Core & Web Development</td>
+            <td class="ai-cell">Build & Deploy ML Model (Flask/Streamlit)</td>
+            <td class="exam-cell">WAEC + JAMB CBT Simulation</td>
+          </tr>
+          <tr>
+            <td><span class="level-badge">SS 2</span></td>
+            <td>ML, AI & Data Analysis (Capstone)</td>
+            <td class="ai-cell">End-to-End AI Project + Portfolio</td>
+            <td class="exam-cell">JAMB UTME Full CBT Mock</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="reveal" style="text-align:center; font-size:13px; color:var(--muted); margin-top:20px;">Every student receives a printed course manual, N-TECH/EduLab completion certificate, and entry into the Annual EduLab Hackathon.</p>
+  </div>
+</section>
+
+<!-- ── ELIGIBILITY ────────────────────────────────────────────────── -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag tag-amber">Who Qualifies</span>
+      <h2>Is Your School<br/>a Good Fit?</h2>
+      <p>We are currently accepting applications from schools in Ondo and Osun States. Here's what we look for.</p>
+    </div>
+    <div class="eligibility-grid reveal">
+      <div class="eligibility-card">
+        <div class="check">🏫</div>
+        <h3>Private School</h3>
+        <p>Any registered private primary or secondary school — or a combined primary/secondary school — is eligible to apply.</p>
+      </div>
+      <div class="eligibility-card">
+        <div class="check">👥</div>
+        <h3>Minimum 100 Students</h3>
+        <p>Your school should have at least 100 enrolled students to make the programme financially viable for both parties.</p>
+      </div>
+      <div class="eligibility-card">
+        <div class="check">🚫</div>
+        <h3>No Functional ICT Lab</h3>
+        <p>Schools without a working computer lab are our priority. If you have one, we can still discuss a curriculum-only partnership.</p>
+      </div>
+      <div class="eligibility-card">
+        <div class="check">🔌</div>
+        <h3>A Spare Room + Power</h3>
+        <p>You need one dedicated room of at least 40sqm and a stable mains power connection. We handle everything else.</p>
+      </div>
+      <div class="eligibility-card">
+        <div class="check">📍</div>
+        <h3>Ondo or Osun State</h3>
+        <p>We are currently deploying in Ondo and Osun States. Schools in other Southwest states can join the waitlist.</p>
+      </div>
+      <div class="eligibility-card">
+        <div class="check">✅</div>
+        <h3>Committed Proprietor</h3>
+        <p>A 3-year BOT partnership requires buy-in from the school proprietor or principal. It is a long-term commitment — and the benefits compound over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CEO ─────────────────────────────────────────────────────────── -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="ceo-section reveal">
+      <div>
+        <p style="font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px;">From the CEO</p>
+        <div class="ceo-quote">
+          I have spent years watching bright Nigerian students fail JAMB and WAEC — not because they weren't smart, but because they had never touched a computer before the exam. EduLab exists to end that. We bring the lab to the child, not the other way around.
+        </div>
+        <div class="ceo-info">
+          <span class="ceo-name">Sharafdeen Quadri Olalekan</span>
+          <span class="ceo-role">Founder & CEO, EduLab Nigeria</span>
+        </div>
+      </div>
+      <div>
+        <div class="ceo-card">
+          <div class="ceo-avatar">S</div>
+          <h4>Sharafdeen Quadri Olalekan</h4>
+          <div class="title">Founder & CEO</div>
+          <p>Full-stack developer, technology educator, and Branch Manager at N-TECH Info Systems Ltd. with 3+ years training students in Ondo and Osun States. Architect of N-TECH's school partnership curriculum and CBT preparation programme.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── APPLICATION FORM ──────────────────────────────────────────── -->
+<section class="section form-section" id="apply">
+  <div class="container">
+    <div class="form-wrapper reveal">
+      <span class="tag tag-blue" style="margin-bottom:20px;display:inline-flex;">📋 School Partnership Application</span>
+      <h2 class="form-title">Apply to Partner<br/>With EduLab</h2>
+      <p class="form-sub">Fill in the form below. Our team will review your school profile and contact you within 5 working days to schedule a free school visit.</p>
+
+      <div id="application-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="school-name">School Name *</label>
+            <input type="text" id="school-name" placeholder="e.g. Sunshine Academy" required/>
+          </div>
+          <div class="form-group">
+            <label for="proprietor">Proprietor / Principal Name *</label>
+            <input type="text" id="proprietor" placeholder="Full name" required/>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" placeholder="+234 ..." required/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" placeholder="school@example.com" required/>
+          </div>
+          <div class="form-group">
+            <label for="state">State *</label>
+            <select id="state" required>
+              <option value="" disabled selected>Select state</option>
+              <option>Ondo State</option>
+              <option>Osun State</option>
+              <option>Other Southwest State (Waitlist)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="lga">City / LGA *</label>
+            <input type="text" id="lga" placeholder="e.g. Akure, Osogbo, Ado-Ekiti" required/>
+          </div>
+          <div class="form-group">
+            <label for="type">School Type *</label>
+            <select id="type" required>
+              <option value="" disabled selected>Select type</option>
+              <option>Primary School</option>
+              <option>Secondary School</option>
+              <option>Combined Primary & Secondary</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="students">Approximate Student Population *</label>
+            <select id="students" required>
+              <option value="" disabled selected>Select range</option>
+              <option>100 – 200 students</option>
+              <option>201 – 400 students</option>
+              <option>401 – 700 students</option>
+              <option>700+ students</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="lab">Current ICT Lab Status</label>
+            <select id="lab">
+              <option value="" disabled selected>Select status</option>
+              <option>No ICT lab at all</option>
+              <option>Outdated/non-functional lab</option>
+              <option>Functional lab but limited computers</option>
+              <option>Good lab — interested in curriculum partnership only</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="message">Anything else you'd like us to know?</label>
+            <textarea id="message" placeholder="Tell us about your school, your students, or any questions you have..."></textarea>
+          </div>
+        </div>
+        <button class="form-submit" onclick="submitForm()">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Submit Application
+        </button>
+        <p class="form-note">🔒 Your information is confidential and will only be used to assess your school's partnership eligibility.</p>
+      </div>
+
+      <div class="form-success" id="form-success">
+        <div class="check-circle">✅</div>
+        <h3>Application Received!</h3>
+        <p>Thank you for applying. Our team will review your school profile and reach out within 5 working days to schedule a free visit.</p>
+        <p style="margin-top:12px; font-size:13px; color:var(--muted);">Questions? Email us at <strong>olalekanquadri58@gmail.com</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="4" width="16" height="11" rx="2" stroke="white" stroke-width="1.5"/>
+              <path d="M7 15v2M13 15v2M5 17h10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M7 9l2 2 4-4" stroke="#7DD3FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="logo-text" style="color:white;">EduLab<span style="color:#2589D4;">Nigeria</span></span>
+        </a>
+        <p style="margin-top:16px;">We put computer labs in schools that can't afford one — and train every student inside them. Operating in Ondo & Osun States.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="#how">How It Works</a>
+        <a href="#schools">For Schools</a>
+        <a href="#curriculum">Curriculum</a>
+        <a href="#about">About</a>
+        <a href="#apply">Apply Now</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:hello@edulabng.com">hello@edulabng.com</a>
+        <a href="tel:+2349050829691">+234 905 082 9691</a>
+        <a href="tel:+2348067393450">+234 8067393450</a>
+        <a href="#">Akure, Ondo State</a>
+        <a href="#">Osogbo, Osun State</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 EduLab Nigeria. All rights reserved.</p>
+      <span class="footer-badge">BUILD · OPERATE · TEACH</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll nav shadow
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Form submit (static — shows success state)
+function submitForm() {
+  const required = ['school-name','proprietor','phone','email','state','lga','type','students'];
+  let valid = true;
+  required.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) {
+      el.style.borderColor = '#EF4444';
+      valid = false;
+      el.addEventListener('input', () => el.style.borderColor = '', { once: true });
+    }
+  });
+  if (!valid) { alert('Please fill in all required fields marked with *.'); return; }
+  document.getElementById('application-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+  window.scrollTo({ top: document.getElementById('apply').offsetTop - 80, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
