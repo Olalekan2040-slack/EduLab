@@ -6,524 +6,571 @@
 <title>EduLab Nigeria — Computer Labs in Every School</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,700&family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
-/* ── Reset & Variables ──────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#07101E;
+  --navy:#0A1C35;
+  --blue:#0C4A8A;
+  --sky:#1882D9;
+  --cyan:#05C3F9;
+  --ice:#DBF0FF;
+  --green:#0B6B45;
+  --lime:#BDFCE3;
+  --gold:#C47D0A;
+  --sand:#FAF8F3;
+  --off:#F5F3EE;
+  --white:#FFFFFF;
+  --mid:#3B4A5C;
+  --muted:#6E7D8F;
+  --border:#DDE6F0;
+  --font-h:'Fraunces',Georgia,serif;
+  --font-b:'Outfit',sans-serif;
+  --font-m:'Space Mono',monospace;
+  --r:16px;--r2:28px;--r3:48px;
+  --sh:0 4px 24px rgba(7,16,30,.1);
+  --sh2:0 12px 56px rgba(7,16,30,.16);
+  --sh3:0 32px 96px rgba(7,16,30,.22);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--sand);color:var(--ink);line-height:1.6;overflow-x:hidden}
 
-:root {
-  --navy:   #0B1F3A;
-  --blue:   #1464A0;
-  --sky:    #2589D4;
-  --ice:    #E8F3FC;
-  --green:  #0F7B55;
-  --lime:   #D4F5E9;
-  --amber:  #D97706;
-  --cream:  #FAFAF7;
-  --dark:   #0D1117;
-  --mid:    #374151;
-  --muted:  #6B7280;
-  --border: #E2EAF2;
-  --white:  #FFFFFF;
-
-  --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body:    'Sora', sans-serif;
-  --font-mono:    'JetBrains Mono', monospace;
-
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 32px;
-
-  --shadow-sm: 0 2px 8px rgba(11,31,58,0.07);
-  --shadow-md: 0 8px 32px rgba(11,31,58,0.12);
-  --shadow-lg: 0 24px 64px rgba(11,31,58,0.16);
+/* ══ NOISE OVERLAY ══ */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: var(--font-body);
-  background: var(--cream);
-  color: var(--dark);
-  line-height: 1.6;
-  overflow-x: hidden;
+/* ══ CURSOR ══ */
+.cur{position:fixed;pointer-events:none;z-index:9999;mix-blend-mode:exclusion}
+.cur-dot{width:8px;height:8px;background:#fff;border-radius:50%;transform:translate(-50%,-50%)}
+.cur-ring{
+  position:fixed;width:40px;height:40px;border-radius:50%;
+  border:1.5px solid rgba(5,195,249,.6);pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s
 }
 
-/* ── Utility ─────────────────────────────────────────────────────── */
-.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-.tag {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  padding: 5px 12px; border-radius: 99px;
+/* ══ NAV ══ */
+nav{position:fixed;top:0;inset-inline:0;z-index:100;padding:14px 24px}
+.nav-pill{
+  max-width:1160px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(10,28,53,.88);backdrop-filter:blur(28px) saturate(180%);
+  border:1px solid rgba(255,255,255,.1);border-radius:var(--r3);
+  padding:10px 10px 10px 20px;
+  box-shadow:0 8px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.07);
+  transition:all .3s
 }
-.tag-blue  { background: var(--ice);  color: var(--blue); border: 1px solid #C5DCF0; }
-.tag-green { background: var(--lime); color: var(--green); border: 1px solid #A7EDD5; }
-.tag-amber { background: #FEF3C7; color: var(--amber); border: 1px solid #FDE68A; }
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-m{
+  width:36px;height:36px;border-radius:12px;flex-shrink:0;
+  background:linear-gradient(145deg,var(--cyan),var(--sky));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(5,195,249,.35)
+}
+.logo-m svg{width:18px;height:18px}
+.logo-t{font-size:15px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.logo-t em{font-style:normal;color:var(--cyan)}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
+.nav-links a{
+  font-size:13px;font-weight:500;color:rgba(255,255,255,.65);
+  text-decoration:none;padding:7px 14px;border-radius:99px;
+  transition:all .2s
+}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.nav-cta{
+  background:linear-gradient(135deg,var(--cyan),var(--sky)) !important;
+  color:#fff !important;font-weight:700 !important;
+  box-shadow:0 4px 16px rgba(5,195,249,.3) !important
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(5,195,249,.45) !important}
+.hburg{display:none;background:none;border:none;cursor:pointer;padding:6px}
+.hburg span{display:block;width:20px;height:1.5px;background:#fff;margin:5px 0;border-radius:2px;transition:all .25s}
 
-/* ── NAV ─────────────────────────────────────────────────────────── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(250,250,247,0.92);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  transition: box-shadow 0.3s;
-}
-nav.scrolled { box-shadow: var(--shadow-sm); }
-
-.nav-inner {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 24px; max-width: 1120px; margin: 0 auto;
-}
-
-.logo {
-  display: flex; align-items: center; gap: 10px;
-  text-decoration: none;
-}
-.logo-mark {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.logo-mark svg { width: 20px; height: 20px; }
-.logo-text { font-size: 16px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; }
-.logo-text span { color: var(--sky); }
-
-.nav-links {
-  display: flex; align-items: center; gap: 32px;
-  list-style: none;
-}
-.nav-links a {
-  font-size: 14px; font-weight: 500; color: var(--mid);
-  text-decoration: none; transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--navy); }
-
-.nav-cta {
-  background: var(--navy); color: var(--white) !important;
-  padding: 10px 20px; border-radius: var(--radius-md);
-  font-size: 13px !important; font-weight: 600 !important;
-  transition: background 0.2s, transform 0.15s !important;
-  text-decoration: none;
-}
-.nav-cta:hover { background: var(--blue) !important; transform: translateY(-1px); }
-
-/* ── HERO ─────────────────────────────────────────────────────────── */
-.hero {
-  padding: 140px 0 100px;
-  position: relative;
-  overflow: hidden;
+/* ══ HERO ══ */
+.hero{
+  min-height:100vh;display:grid;place-items:center;
+  background:var(--navy);position:relative;overflow:hidden;
+  padding:140px 0 80px
 }
 
-.hero-bg {
-  position: absolute; inset: 0; z-index: 0;
+/* animated gradient mesh */
+.hero-mesh{
+  position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(20,100,160,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 80% at 10% 80%, rgba(15,123,85,0.06) 0%, transparent 60%);
+    radial-gradient(ellipse 70% 80% at 80% 20%, rgba(5,195,249,.12) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 60% at 10% 70%, rgba(12,74,138,.25) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 50% 90%, rgba(11,107,69,.1) 0%, transparent 60%);
+  animation:meshShift 12s ease-in-out infinite alternate
+}
+@keyframes meshShift{
+  0%{filter:hue-rotate(0deg)}
+  100%{filter:hue-rotate(15deg)}
 }
 
-.hero-grid {
-  position: absolute; inset: 0; z-index: 0; opacity: 0.4;
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+/* grid dots */
+.hero-dots{
+  position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.08) 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black 20%,transparent 80%)
 }
 
-.hero-content {
-  position: relative; z-index: 1;
-  max-width: 720px;
+.hero-inner{
+  position:relative;z-index:2;
+  max-width:1160px;margin:0 auto;padding:0 32px;
+  display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center
+}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:48px}}
+
+.hero-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-m);font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);
+  background:rgba(5,195,249,.1);border:1px solid rgba(5,195,249,.25);
+  padding:7px 14px;border-radius:99px;margin-bottom:28px;
+  animation:fadeUp .5s ease both
+}
+.hero-chip .pulse{
+  width:6px;height:6px;border-radius:50%;background:var(--cyan);
+  animation:pulse 1.8s ease infinite
+}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(5,195,249,.5)}70%{box-shadow:0 0 0 6px rgba(5,195,249,0)}}
+
+.hero h1{
+  font-family:var(--font-h);
+  font-size:clamp(48px,5.5vw,78px);
+  line-height:.96;color:#fff;letter-spacing:-.03em;
+  margin-bottom:28px;font-weight:700;
+  animation:fadeUp .5s .1s ease both
+}
+.hero h1 .line2{
+  font-style:italic;font-weight:300;color:var(--cyan);
+  display:block
+}
+.hero h1 .line3{
+  display:block;
+  -webkit-text-stroke:1px rgba(255,255,255,.35);
+  color:transparent;
+  font-weight:700
 }
 
-.hero-tag { margin-bottom: 24px; animation: fadeUp 0.6s ease both; }
-
-.hero h1 {
-  font-family: var(--font-display);
-  font-size: clamp(40px, 6vw, 68px);
-  line-height: 1.08;
-  color: var(--navy);
-  letter-spacing: -0.02em;
-  margin-bottom: 24px;
-  animation: fadeUp 0.6s 0.1s ease both;
-}
-.hero h1 em {
-  font-style: italic;
-  color: var(--sky);
-  position: relative;
-  display: inline-block;
-}
-.hero h1 em::after {
-  content: '';
-  position: absolute; bottom: 4px; left: 0; right: 0;
-  height: 3px; border-radius: 2px;
-  background: linear-gradient(90deg, var(--sky), transparent);
+.hero-sub{
+  font-size:17px;color:rgba(255,255,255,.65);line-height:1.75;
+  max-width:460px;margin-bottom:40px;font-weight:300;
+  animation:fadeUp .5s .2s ease both
 }
 
-.hero-desc {
-  font-size: 18px; color: var(--mid); line-height: 1.7;
-  max-width: 560px; margin-bottom: 40px;
-  animation: fadeUp 0.6s 0.2s ease both;
+.hero-btns{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  animation:fadeUp .5s .3s ease both
+}
+.btn-p{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--cyan);color:var(--ink);
+  padding:14px 28px;border-radius:var(--r3);
+  font-size:14px;font-weight:800;text-decoration:none;
+  box-shadow:0 8px 28px rgba(5,195,249,.4);
+  transition:all .25s;letter-spacing:.01em;border:none;cursor:pointer;
+  font-family:var(--font-b)
+}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(5,195,249,.55)}
+.btn-g{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:#fff;
+  padding:14px 24px;border-radius:var(--r3);
+  font-size:14px;font-weight:600;text-decoration:none;
+  border:1px solid rgba(255,255,255,.2);transition:all .25s
+}
+.btn-g:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.4)}
+
+/* hero stat pills */
+.hero-pills{
+  display:flex;gap:10px;flex-wrap:wrap;margin-top:48px;
+  animation:fadeUp .5s .4s ease both
+}
+.hpill{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r2);padding:12px 18px;
+  backdrop-filter:blur(12px);transition:all .25s
+}
+.hpill:hover{background:rgba(255,255,255,.1);border-color:rgba(5,195,249,.3)}
+.hpill .val{
+  font-family:var(--font-h);font-size:26px;color:#fff;
+  line-height:1;font-weight:700;font-style:italic
+}
+.hpill .val em{color:var(--cyan);font-style:normal}
+.hpill .lab{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px;line-height:1.3}
+
+/* ══ 3D LAB VISUAL ══ */
+.hero-visual{position:relative;animation:fadeUp .7s .25s ease both}
+@media(max-width:900px){.hero-visual{display:none}}
+
+.scene{perspective:1000px;perspective-origin:50% 40%}
+.card-3d{
+  transform-style:preserve-3d;
+  transform:rotateX(8deg) rotateY(-14deg);
+  animation:floatCard 7s ease-in-out infinite;
+  position:relative
+}
+@keyframes floatCard{
+  0%,100%{transform:rotateX(8deg) rotateY(-14deg) translateY(0)}
+  50%{transform:rotateX(5deg) rotateY(-11deg) translateY(-18px)}
+}
+.screen-wrap{
+  background:linear-gradient(160deg,#0D243E 0%,#061220 100%);
+  border-radius:24px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 48px 96px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.05),0 0 80px rgba(5,195,249,.12);
+  padding:22px
+}
+.sw-bar{display:flex;align-items:center;gap:7px;margin-bottom:18px}
+.sw-dot{width:9px;height:9px;border-radius:50%}
+.sw-dot.r{background:#FF5F57}.sw-dot.y{background:#FEBC2E}.sw-dot.g{background:#28C840}
+.sw-label{margin-left:auto;font-family:var(--font-m);font-size:10px;color:rgba(255,255,255,.25)}
+
+/* photo slot */
+.lab-img-wrap{position:relative;border-radius:16px;overflow:hidden;height:200px;background:#0A1E38}
+.lab-photo-real{width:100%;height:100%;object-fit:cover;opacity:.85}
+.lab-photo-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(6,18,32,.85) 100%)
+}
+.lab-photo-caption{
+  position:absolute;bottom:14px;left:14px;
+  font-family:var(--font-m);font-size:10px;color:rgba(255,255,255,.6);
+  letter-spacing:.06em
 }
 
-.hero-actions {
-  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-  animation: fadeUp 0.6s 0.3s ease both;
+/* mini metrics row */
+.sw-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.sw-metric{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);
+  border-radius:12px;padding:10px;text-align:center
+}
+.sw-metric .mv{font-family:var(--font-h);font-size:20px;color:var(--cyan);font-style:italic;line-height:1}
+.sw-metric .ml{font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
+
+/* floating badges */
+.fbadge{
+  position:absolute;
+  background:rgba(10,28,53,.92);backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.12);border-radius:18px;
+  padding:10px 16px;display:flex;align-items:center;gap:10px;
+  box-shadow:0 12px 40px rgba(0,0,0,.4)
+}
+.fbadge.f1{bottom:-18px;left:-44px;animation:fbFloat 5s ease-in-out infinite}
+.fbadge.f2{top:-14px;right:-36px;animation:fbFloat 5s 2.5s ease-in-out infinite}
+@keyframes fbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.fb-ico{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.fb-t{font-size:13px;font-weight:700;color:#fff}
+.fb-s{font-size:11px;color:rgba(255,255,255,.45)}
+
+/* ══ MARQUEE ══ */
+.mq{background:#040D1A;padding:13px 0;overflow:hidden;position:relative}
+.mq::before,.mq::after{
+  content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none
+}
+.mq::before{left:0;background:linear-gradient(90deg,#040D1A,transparent)}
+.mq::after{right:0;background:linear-gradient(-90deg,#040D1A,transparent)}
+.mq-track{display:flex;animation:mq 28s linear infinite;white-space:nowrap}
+.mq-track span{font-family:var(--font-m);font-size:10px;font-weight:700;color:rgba(255,255,255,.3);padding:0 20px;letter-spacing:.13em;text-transform:uppercase}
+.mq-track span.a{color:var(--cyan)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ══ SECTIONS ══ */
+.sec{padding:96px 0}
+.ctn{max-width:1160px;margin:0 auto;padding:0 32px}
+
+.sec-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-m);font-size:10px;font-weight:700;
+  letter-spacing:.13em;text-transform:uppercase;
+  padding:6px 14px;border-radius:99px;margin-bottom:18px
+}
+.chip-b{background:rgba(24,130,217,.1);color:var(--sky);border:1px solid rgba(24,130,217,.2)}
+.chip-g{background:rgba(11,107,69,.1);color:var(--green);border:1px solid rgba(11,107,69,.2)}
+.chip-a{background:rgba(196,125,10,.1);color:var(--gold);border:1px solid rgba(196,125,10,.2)}
+
+.sec-h{
+  font-family:var(--font-h);
+  font-size:clamp(34px,4vw,56px);
+  color:var(--navy);line-height:1.05;letter-spacing:-.025em;
+  font-weight:700;margin-bottom:16px
+}
+.sec-h em{font-style:italic;font-weight:300;color:var(--sky)}
+.sec-sub{font-size:17px;color:var(--muted);max-width:500px;line-height:1.7;font-weight:300}
+
+/* ══ HOW IT WORKS — alternating timeline ══ */
+.how-bg{background:var(--off)}
+.steps{display:flex;flex-direction:column;gap:2px;margin-top:52px;border-radius:var(--r2);overflow:hidden;border:1px solid var(--border);box-shadow:var(--sh)}
+.srow{
+  display:grid;grid-template-columns:80px 1fr;
+  background:var(--white);transition:background .25s;
+  border-top:1px solid var(--border)
+}
+.srow:first-child{border-top:none}
+.srow:hover{background:var(--ice)}
+.srow-num{
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:28px 0 0;
+  font-family:var(--font-h);font-size:48px;font-weight:700;font-style:italic;
+  color:rgba(12,74,138,.1);line-height:1
+}
+.srow-body{padding:28px 28px 28px 0}
+.srow-tag{
+  display:inline-block;font-family:var(--font-m);font-size:9px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:99px;
+  margin-bottom:10px
+}
+.srow h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.srow p{font-size:14px;color:var(--muted);line-height:1.7}
+
+/* ══ WHAT YOU GET ══ */
+.get-bg{
+  background:var(--navy);position:relative;overflow:hidden
+}
+.get-pattern{
+  position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:30px 30px
+}
+.get-glow{
+  position:absolute;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(5,195,249,.1) 0%,transparent 70%);
+  top:-200px;right:-200px;pointer-events:none
+}
+.get-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:52px}
+@media(max-width:700px){.get-grid{grid-template-columns:1fr}}
+.gc{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);border-radius:var(--r2);
+  padding:32px 28px;position:relative;overflow:hidden;
+  transition:all .3s
+}
+.gc::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(5,195,249,.06) 0%,transparent 60%);
+  opacity:0;transition:opacity .3s
+}
+.gc:hover{border-color:rgba(5,195,249,.25);transform:translateY(-4px);box-shadow:0 20px 56px rgba(0,0,0,.45)}
+.gc:hover::after{opacity:1}
+.gc-ico{
+  width:50px;height:50px;border-radius:16px;margin-bottom:18px;
+  background:linear-gradient(135deg,rgba(5,195,249,.2),rgba(24,130,217,.2));
+  border:1px solid rgba(5,195,249,.2);
+  display:flex;align-items:center;justify-content:center
+}
+.gc-ico svg{width:24px;height:24px;color:var(--cyan)}
+.gc h3{font-size:19px;font-weight:700;color:#fff;margin-bottom:8px}
+.gc>p{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:14px;line-height:1.7}
+.gc ul{list-style:none}
+.gc ul li{
+  font-size:13px;color:rgba(255,255,255,.6);
+  padding:7px 0;border-top:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:flex-start;gap:9px
+}
+.arr{color:var(--cyan);font-size:11px;margin-top:2px;flex-shrink:0;font-family:var(--font-m)}
+
+/* ══ CURRICULUM ══ */
+.curr-bg{background:var(--sand)}
+.ctable{width:100%;border-collapse:collapse;background:var(--white);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh2);border:1px solid var(--border)}
+.ctable th{background:var(--navy);color:#fff;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:15px 20px;text-align:left}
+.ctable td{padding:14px 20px;font-size:14px;color:var(--mid);border-top:1px solid var(--border);vertical-align:middle}
+.ctable tr:hover td{background:var(--ice)}
+.lvlb{font-family:var(--font-m);font-size:10px;font-weight:700;padding:4px 10px;border-radius:7px;background:var(--ice);color:var(--blue);white-space:nowrap}
+.ai-c{color:var(--green);font-weight:600}
+.ex-c{color:var(--gold);font-weight:600}
+
+/* ══ ELIGIBILITY ══ */
+.el-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:52px}
+@media(max-width:820px){.el-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.el-grid{grid-template-columns:1fr}}
+.elc{
+  border:1.5px solid var(--border);border-radius:var(--r2);
+  padding:28px 24px;background:var(--white);position:relative;overflow:hidden;
+  transition:all .3s
+}
+.elc:hover{border-color:var(--sky);box-shadow:0 10px 36px rgba(24,130,217,.1);transform:translateY(-3px)}
+.elc-n{
+  position:absolute;top:14px;right:18px;
+  font-family:var(--font-h);font-size:56px;font-weight:700;font-style:italic;
+  color:rgba(12,74,138,.06);line-height:1
+}
+.elc-i{width:44px;height:44px;border-radius:14px;background:var(--ice);border:1px solid #C5DCF0;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.elc-i svg{width:20px;height:20px;color:var(--blue)}
+.elc h3{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:7px}
+.elc p{font-size:13px;color:var(--muted);line-height:1.65}
+
+/* ══ PHOTO FEATURE ══ */
+.photo-strip{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:52px
+}
+@media(max-width:700px){.photo-strip{grid-template-columns:1fr}}
+.photo-card{border-radius:var(--r2);overflow:hidden;position:relative}
+.photo-card img{width:100%;object-fit:cover;display:block;transition:transform .6s;height:340px}
+.photo-card.tall img{height:100%}
+.photo-card:hover img{transform:scale(1.04)}
+.photo-cap{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(transparent,rgba(7,16,30,.75));
+  padding:40px 20px 16px;color:#fff;font-size:13px;font-weight:500
 }
 
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--navy); color: var(--white);
-  padding: 14px 28px; border-radius: var(--radius-md);
-  font-size: 15px; font-weight: 600;
-  text-decoration: none; transition: all 0.2s;
-  box-shadow: 0 4px 20px rgba(11,31,58,0.2);
-}
-.btn-primary:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(20,100,160,0.3); }
+/* ══ NUMBERS ══ */
+.nums-bg{background:var(--navy)}
+.nums-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.07);border-radius:var(--r2);overflow:hidden;margin-top:52px;border:1px solid rgba(255,255,255,.07)}
+@media(max-width:700px){.nums-grid{grid-template-columns:1fr 1fr}}
+.num-item{background:var(--navy);padding:36px 28px;text-align:center;transition:background .25s}
+.num-item:hover{background:rgba(255,255,255,.04)}
+.num-v{font-family:var(--font-h);font-size:52px;color:#fff;font-weight:700;font-style:italic;line-height:1}
+.num-v em{color:var(--cyan);font-style:normal}
+.num-l{font-size:13px;color:rgba(255,255,255,.45);margin-top:6px;line-height:1.4}
 
-.btn-secondary {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: transparent; color: var(--navy);
-  padding: 14px 24px; border-radius: var(--radius-md);
-  font-size: 15px; font-weight: 500;
-  text-decoration: none; border: 1.5px solid var(--border);
-  transition: all 0.2s;
+/* ══ CEO ══ */
+.ceo-wrap{
+  background:linear-gradient(145deg,#071828 0%,#0A2848 100%);
+  border-radius:var(--r3);padding:72px 60px;
+  display:grid;grid-template-columns:1fr 360px;gap:60px;align-items:center;
+  position:relative;overflow:hidden;box-shadow:var(--sh3)
 }
-.btn-secondary:hover { border-color: var(--sky); color: var(--sky); background: var(--ice); }
+@media(max-width:880px){.ceo-wrap{grid-template-columns:1fr;padding:44px 32px;gap:40px}}
+.ceo-orb{
+  position:absolute;right:-120px;top:-120px;width:480px;height:480px;border-radius:50%;
+  background:radial-gradient(circle,rgba(5,195,249,.12) 0%,transparent 70%);pointer-events:none
+}
+.ceo-label{font-family:var(--font-m);font-size:10px;letter-spacing:.13em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:22px}
+.ceo-q{
+  font-family:var(--font-h);font-size:clamp(22px,2.8vw,34px);
+  color:#fff;line-height:1.35;font-style:italic;font-weight:300;margin-bottom:32px
+}
+.ceo-q::before{content:'\201C';color:var(--cyan);font-size:1.4em;line-height:0;vertical-align:-.35em;margin-right:3px}
+.ceo-q::after{content:'\201D';color:var(--cyan);font-size:1.4em;line-height:0;vertical-align:-.35em;margin-left:3px}
+.ceo-by .nm{font-size:16px;font-weight:700;color:#fff}
+.ceo-by .rl{font-size:12px;color:rgba(255,255,255,.4);margin-top:3px;font-family:var(--font-m)}
 
-.hero-stats {
-  display: flex; gap: 48px; margin-top: 64px; flex-wrap: wrap;
-  animation: fadeUp 0.6s 0.4s ease both;
+.ceo-card{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r2);padding:30px;
+  transition:transform .4s;transform-style:preserve-3d
 }
-.stat-item {}
-.stat-num {
-  font-family: var(--font-display);
-  font-size: 36px; color: var(--navy); line-height: 1;
+.ceo-card:hover{transform:rotateY(-6deg) rotateX(3deg)}
+.ceo-av{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--cyan),var(--sky));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-h);font-size:30px;color:#fff;font-weight:700;
+  margin-bottom:16px;box-shadow:0 8px 28px rgba(5,195,249,.3)
 }
-.stat-num span { color: var(--sky); }
-.stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.ceo-card h4{font-size:16px;font-weight:700;color:#fff;margin-bottom:3px}
+.ceo-card h4 a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2)}
+.ceo-card h4 a:hover{border-color:var(--cyan)}
+.ceo-card .ct{font-family:var(--font-m);font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.ceo-card p{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7}
+.ceo-lnk{
+  display:inline-flex;align-items:center;gap:7px;margin-top:16px;
+  font-size:12px;color:var(--cyan);text-decoration:none;font-family:var(--font-m)
+}
+.ceo-lnk:hover{gap:11px;transition:gap .2s}
 
-/* ── MARQUEE ─────────────────────────────────────────────────────── */
-.marquee-strip {
-  padding: 16px 0; background: var(--navy);
-  overflow: hidden; position: relative;
+/* ══ FORM ══ */
+.form-bg{background:var(--white)}
+.form-wrap{
+  max-width:700px;margin:0 auto;
+  background:var(--sand);border:1.5px solid var(--border);
+  border-radius:var(--r3);padding:60px 52px;box-shadow:var(--sh2)
 }
-.marquee-track {
-  display: flex; gap: 0;
-  animation: marquee 22s linear infinite;
-  white-space: nowrap;
+@media(max-width:640px){.form-wrap{padding:36px 24px}}
+.form-h{font-family:var(--font-h);font-size:40px;color:var(--navy);margin-bottom:8px;font-weight:700;letter-spacing:-.025em}
+.form-s{font-size:15px;color:var(--muted);margin-bottom:40px;line-height:1.65;font-weight:300}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:540px){.fgrid{grid-template-columns:1fr}}
+.fg{display:flex;flex-direction:column;gap:7px}
+.fg.full{grid-column:1/-1}
+.fg label{font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.02em;text-transform:uppercase}
+.fg input,.fg select,.fg textarea{
+  padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--r);
+  font-family:var(--font-b);font-size:14px;color:var(--ink);background:var(--white);
+  outline:none;transition:all .2s;appearance:none
 }
-.marquee-track span {
-  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
-  color: rgba(255,255,255,0.6); padding: 0 32px;
-  letter-spacing: 0.1em; text-transform: uppercase;
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  border-color:var(--sky);box-shadow:0 0 0 4px rgba(24,130,217,.1)
 }
-.marquee-track span.accent { color: var(--sky); }
+.fg textarea{resize:vertical;min-height:96px}
+.fg select{
+  cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236E7D8F' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:38px
+}
+.sub-btn{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  color:#fff;border:none;border-radius:var(--r3);
+  font-family:var(--font-b);font-size:15px;font-weight:800;
+  cursor:pointer;transition:all .25s;margin-top:10px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  letter-spacing:.02em;box-shadow:0 8px 32px rgba(10,28,53,.25)
+}
+.sub-btn:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(10,28,53,.35)}
+.fnote{font-size:12px;color:var(--muted);text-align:center;margin-top:14px}
+.fsuccess{display:none;text-align:center;padding:48px 20px}
+.fcheck{width:72px;height:72px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:30px}
+.fsuccess h3{font-family:var(--font-h);font-size:30px;color:var(--navy);margin-bottom:8px;font-weight:700}
+.fsuccess p{font-size:15px;color:var(--muted)}
 
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* ══ FOOTER ══ */
+footer{background:#040D1A;padding:72px 0 32px}
+.fg-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:52px;margin-bottom:52px}
+@media(max-width:700px){.fg-grid{grid-template-columns:1fr}}
+.fb-brand p{font-size:14px;color:rgba(255,255,255,.35);line-height:1.75;margin-top:14px}
+.fc h4{font-size:11px;font-weight:700;color:#fff;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.fc a{display:block;font-size:14px;color:rgba(255,255,255,.35);text-decoration:none;margin-bottom:10px;transition:color .2s}
+.fc a:hover{color:#fff}
+.fbot{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.fbot p{font-size:12px;color:rgba(255,255,255,.2)}
+.fbot-badge{font-family:var(--font-m);font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.13em}
 
-/* ── HOW IT WORKS ────────────────────────────────────────────────── */
-.section { padding: 96px 0; }
-.section-head { text-align: center; margin-bottom: 64px; }
-.section-head .tag { margin-bottom: 16px; }
-.section-head h2 {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 48px);
-  color: var(--navy); line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin-bottom: 16px;
-}
-.section-head p { font-size: 17px; color: var(--muted); max-width: 520px; margin: 0 auto; }
+/* ══ ANIMATIONS ══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.rev{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.rev.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 
-.steps-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 2px;
-  background: var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  border: 1px solid var(--border);
-}
-.step {
-  background: var(--white);
-  padding: 36px 28px;
-  transition: background 0.2s;
-  position: relative;
-}
-.step:hover { background: var(--ice); }
-.step-num {
-  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
-  color: var(--sky); letter-spacing: 0.1em;
-  margin-bottom: 16px; display: block;
-}
-.step-icon {
-  width: 48px; height: 48px; border-radius: var(--radius-md);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 20px;
-  font-size: 0;
-}
-.step-icon svg { width: 24px; height: 24px; }
-.offers-bg { background: var(--navy); }
-.offers-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-@media(max-width:680px){ .offers-grid { grid-template-columns: 1fr; } }
-.offer-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: var(--radius-lg);
-  padding: 32px 28px;
-  transition: background 0.2s, border-color 0.2s;
-}
-.offer-card:hover {
-  background: rgba(255,255,255,0.09);
-  border-color: rgba(37,137,212,0.4);
-}
-.offer-card .ico {
-  width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
-  margin-bottom: 16px; border-radius: 16px; background: rgba(255,255,255,0.12); color: var(--white);
-}
-.offer-card .ico svg { width: 24px; height: 24px; }
-.offer-card h3 { font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
-.offer-card p  { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; }
-.offer-card ul { list-style: none; margin-top: 14px; }
-.offer-card ul li {
-  font-size: 13px; color: rgba(255,255,255,0.65);
-  padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.07);
-  display: flex; align-items: flex-start; gap: 8px;
-}
-.offer-card ul li::before { content: "→"; color: var(--sky); flex-shrink: 0; font-family: var(--font-mono); font-size: 12px; margin-top: 1px; }
-
-/* ── CURRICULUM ──────────────────────────────────────────────────── */
-.curriculum-table {
-  width: 100%; border-collapse: collapse;
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border);
-}
-.curriculum-table th {
-  background: var(--navy); color: var(--white);
-  font-size: 12px; font-weight: 600;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  padding: 14px 20px; text-align: left;
-}
-.curriculum-table td {
-  padding: 14px 20px; font-size: 14px; color: var(--mid);
-  border-top: 1px solid var(--border); vertical-align: middle;
-}
-.curriculum-table tr:nth-child(even) td { background: #F8FAFD; }
-.curriculum-table tr:hover td { background: var(--ice); }
-.level-badge {
-  display: inline-block; font-family: var(--font-mono);
-  font-size: 11px; font-weight: 600; padding: 3px 8px;
-  border-radius: var(--radius-sm); background: var(--ice);
-  color: var(--blue); white-space: nowrap;
-}
-.ai-cell { color: var(--green); font-weight: 500; }
-.exam-cell { color: var(--amber); font-weight: 500; }
-
-/* ── WHO WE SERVE ────────────────────────────────────────────────── */
-.eligibility-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-.eligibility-card {
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 28px 24px;
-  background: var(--white);
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-.eligibility-card:hover {
-  border-color: var(--sky);
-  box-shadow: var(--shadow-sm);
-}
-.eligibility-card .check {
-  width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
-  margin-bottom: 14px; border-radius: 14px; background: var(--sky); color: var(--white);
-}
-.eligibility-card .check svg { width: 22px; height: 22px; }
-.eligibility-card h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-.eligibility-card p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
-
-/* ── CEO SECTION ─────────────────────────────────────────────────── */
-.ceo-section {
-  background: linear-gradient(135deg, var(--navy) 0%, #0F2E50 100%);
-  border-radius: var(--radius-xl);
-  padding: 64px;
-  display: grid; grid-template-columns: 1fr 320px;
-  gap: 48px; align-items: center;
-}
-@media(max-width:800px){ .ceo-section { grid-template-columns: 1fr; padding: 40px 28px; } }
-.ceo-quote {
-  font-family: var(--font-display);
-  font-size: clamp(22px, 3vw, 30px);
-  color: var(--white); line-height: 1.4;
-  font-style: italic;
-}
-.ceo-quote::before { content: "\201C"; color: var(--sky); font-size: 1.4em; line-height: 0; vertical-align: -0.3em; margin-right: 4px; }
-.ceo-quote::after  { content: "\201D"; color: var(--sky); font-size: 1.4em; line-height: 0; vertical-align: -0.3em; margin-left: 4px; }
-.ceo-info { display: flex; flex-direction: column; gap: 8px; margin-top: 28px; }
-.ceo-info .ceo-name { font-size: 17px; font-weight: 700; color: var(--white); }
-.ceo-info .ceo-role { font-size: 13px; color: rgba(255,255,255,0.55); font-family: var(--font-mono); }
-.ceo-card {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-}
-.ceo-photo {
-  width: 100%; height: auto; border-radius: var(--radius-lg); object-fit: cover; margin-bottom: 20px;
-}
-.ceo-card h4 { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
-.ceo-card h4 a { color: inherit; text-decoration: none; }
-.ceo-card .title { font-size: 12px; color: rgba(255,255,255,0.5); font-family: var(--font-mono); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em; }
-.ceo-card p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.7; }
-.profile-link {
-  display: inline-flex; align-items: center; gap: 8px; margin-top: 18px;
-  font-size: 13px; color: rgba(255,255,255,0.7); text-decoration: none;
-}
-.profile-link svg { width: 14px; height: 14px; }
-.profile-link:hover { color: #FFFFFF; }
-
-.form-section { background: var(--white); }
-.form-wrapper {
-  max-width: 680px; margin: 0 auto;
-  background: var(--cream);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 56px 48px;
-}
-@media(max-width:600px){ .form-wrapper { padding: 32px 20px; } }
-
-.form-title {
-  font-family: var(--font-display);
-  font-size: 32px; color: var(--navy);
-  margin-bottom: 8px; letter-spacing: -0.02em;
-}
-.form-sub { font-size: 15px; color: var(--muted); margin-bottom: 36px; }
-
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-@media(max-width:540px){ .form-grid { grid-template-columns: 1fr; } }
-.form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-group.full { grid-column: 1/-1; }
-.form-group label { font-size: 13px; font-weight: 600; color: var(--navy); }
-.form-group input,
-.form-group select,
-.form-group textarea {
-  padding: 12px 16px;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-md);
-  font-family: var(--font-body); font-size: 14px;
-  color: var(--dark); background: var(--white);
-  outline: none; transition: border-color 0.2s, box-shadow 0.2s;
-  appearance: none;
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  border-color: var(--sky);
-  box-shadow: 0 0 0 3px rgba(37,137,212,0.12);
-}
-.form-group textarea { resize: vertical; min-height: 100px; }
-.form-group select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
-.form-submit {
-  width: 100%; padding: 15px;
-  background: var(--navy); color: var(--white);
-  border: none; border-radius: var(--radius-md);
-  font-family: var(--font-body); font-size: 15px; font-weight: 600;
-  cursor: pointer; transition: all 0.2s;
-  margin-top: 8px;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-}
-.form-submit:hover { background: var(--blue); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(11,31,58,0.2); }
-.form-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 16px; }
-.form-success .check-circle { width: 64px; height: 64px; border-radius: 50%;
-  background: var(--lime); display: flex; align-items: center;
-  justify-content: center; margin: 0 auto 20px; font-size: 0;
-}
-.form-success .check-circle svg { width: 28px; height: 28px; color: var(--navy); }
-.form-success {
-  display: none; text-align: center; padding: 40px 20px;
-}
-.form-success h3 { font-family: var(--font-display); font-size: 26px; color: var(--navy); margin-bottom: 8px; }
-.form-success p { font-size: 15px; color: var(--muted); }
-
-/* ── FOOTER ──────────────────────────────────────────────────────── */
-footer {
-  background: var(--dark);
-  padding: 64px 0 32px;
-}
-.footer-grid {
-  display: grid; grid-template-columns: 1.5fr 1fr 1fr;
-  gap: 48px; margin-bottom: 48px;
-}
-@media(max-width:680px){ .footer-grid { grid-template-columns: 1fr; } }
-.footer-brand .logo { margin-bottom: 16px; }
-.footer-brand .logo-text { color: var(--white); }
-.footer-brand p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; }
-.footer-col h4 { font-size: 13px; font-weight: 700; color: var(--white); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 16px; }
-.footer-col a { display: block; font-size: 14px; color: rgba(255,255,255,0.45); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
-.footer-col a:hover { color: var(--white); }
-.footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding-top: 28px;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 12px;
-}
-.footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
-.footer-bottom .footer-badge {
-  font-family: var(--font-mono); font-size: 11px;
-  color: rgba(255,255,255,0.3); letter-spacing: 0.08em;
-}
-
-/* ── ANIMATIONS ──────────────────────────────────────────────────── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.reveal {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* ── MOBILE NAV ──────────────────────────────────────────────────── */
-.hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
-.hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); margin: 5px 0; border-radius: 2px; transition: all 0.25s; }
-@media(max-width:768px){
-  .nav-links { display: none; }
-  .hamburger { display: block; }
-  .nav-links.open {
-    display: flex; flex-direction: column; align-items: flex-start;
-    position: absolute; top: 100%; left: 0; right: 0;
-    background: var(--cream); border-bottom: 1px solid var(--border);
-    padding: 20px 24px; gap: 16px;
-    box-shadow: var(--shadow-md);
+/* ══ MOBILE ══ */
+@media(max-width:800px){
+  .nav-links{display:none}
+  .hburg{display:block}
+  .nav-links.open{
+    display:flex;flex-direction:column;align-items:flex-start;
+    position:absolute;top:calc(100% + 8px);left:0;right:0;
+    background:rgba(10,28,53,.97);backdrop-filter:blur(24px);
+    border:1px solid rgba(255,255,255,.1);border-radius:var(--r2);
+    padding:16px 20px;gap:4px;box-shadow:var(--sh3)
   }
 }
 </style>
 </head>
 <body>
 
-<!-- ── NAV ─────────────────────────────────────────────────────────── -->
-<nav id="nav">
-  <div class="nav-inner">
+<div class="cur" id="cur"><div class="cur-dot"></div></div>
+<div class="cur-ring" id="cur-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-pill">
     <a href="#" class="logo">
-      <div class="logo-mark">
-        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div class="logo-m">
+        <svg viewBox="0 0 20 20" fill="none">
           <rect x="2" y="4" width="16" height="11" rx="2" stroke="white" stroke-width="1.5"/>
           <path d="M7 15v2M13 15v2M5 17h10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M7 9l2 2 4-4" stroke="#7DD3FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7 9l2 2 4-4" stroke="#05C3F9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <span class="logo-text">EduLab<span>Nigeria</span></span>
+      <span class="logo-t">EduLab<em>Nigeria</em></span>
     </a>
-    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+    <button class="hburg" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links">
@@ -531,430 +578,374 @@ footer {
       <li><a href="#schools">For Schools</a></li>
       <li><a href="#curriculum">Curriculum</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#apply" class="nav-cta">Apply Now</a></li>
+      <li><a href="#apply" class="nav-cta">Apply Now →</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- ── HERO ──────────────────────────────────────────────────────────── -->
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-tag">
-        <span class="tag tag-blue">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:6px;">
-            <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="12" cy="9" r="2.5" fill="currentColor"/>
-          </svg>
-          Operating in Southwest Nigeria
-        </span>
-      </div>
-      <h1>A Computer Lab<br/>in Your School.<br/><em>At Zero Cost.</em></h1>
-      <p class="hero-desc">
-        EduLab Nigeria installs and owns fully-equipped ICT labs in private schools — free.
-        Your school uses the systems freely. We train your students in practical tech skills
-        and prepare them for JAMB, WAEC, and NECO exams. We earn a small per-student fee.
-        Everyone wins.
+  <div class="hero-mesh"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-inner">
+    <!-- LEFT -->
+    <div>
+      <div class="hero-chip"><span class="pulse"></span> Operating in Southwest Nigeria</div>
+      <h1>
+        A Computer Lab<br/>
+        <span class="line2">Skills for the World.</span>
+        <span class="line3">At Zero Cost.</span>
+      </h1>
+      <p class="hero-sub">
+        EduLab Nigeria installs and owns functional ICT labs — 20 to 50 computers — in private schools that can't afford one.
+        Your school uses the systems freely. We equip students with world-class tech skills — Python, AI, and machine learning — while preparing them for JAMB, WAEC, and NECO. We earn a small per-student fee. The school pays nothing. Everyone wins.
       </p>
-      <div class="hero-actions">
-        <a href="#apply" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="hero-btns">
+        <a href="#apply" class="btn-p">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 1v13M1 7.5h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           Partner With Us
         </a>
-        <a href="#how" class="btn-secondary">
-          See How It Works
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <a href="#how" class="btn-g">
+          How It Works
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5h8M7 3l3.5 3.5L7 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num">₦<span>0</span></div>
-          <div class="stat-label">Cost to your school</div>
+      <div class="hero-pills">
+        <div class="hpill">
+          <div>
+            <div class="val">₦<em>0</em></div>
+            <div class="lab">Cost to school</div>
+          </div>
         </div>
-        <div class="stat-item">
-          <div class="stat-num">20<span>+</span></div>
-          <div class="stat-label">Computers per lab</div>
+        <div class="hpill">
+          <div>
+            <div class="val"><em>20–50</em></div>
+            <div class="lab">Computers per lab</div>
+          </div>
         </div>
-        <div class="stat-item">
-          <div class="stat-num">3<span>x</span></div>
-          <div class="stat-label">Exams covered — JAMB, WAEC, NECO</div>
+        <div class="hpill">
+          <div>
+            <div class="val"><em>3</em></div>
+            <div class="lab">Exams + Tech Career Skills</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — 3D VISUAL -->
+    <div class="hero-visual">
+      <div class="scene">
+        <div class="card-3d" id="card3d">
+          <div class="screen-wrap">
+            <div class="sw-bar">
+              <div class="sw-dot r"></div><div class="sw-dot y"></div><div class="sw-dot g"></div>
+              <span class="sw-label">EduLab — Active Lab Dashboard</span>
+            </div>
+            <!-- Real school/lab image from Unsplash -->
+            <div class="lab-img-wrap">
+              <img class="lab-photo-real"
+                src="Edulab_students_coding.png"
+                alt="Students in computer lab"
+                onerror="this.style.display='none'"/>
+              <div class="lab-photo-overlay"></div>
+              <div class="lab-photo-caption">EduLab Partner School · Akure, Ondo State</div>
+            </div>
+            <div class="sw-metrics">
+              <div class="sw-metric"><div class="mv">4</div><div class="ml">Schools</div></div>
+              <div class="sw-metric"><div class="mv">2K+</div><div class="ml">Students</div></div>
+              <div class="sw-metric"><div class="mv">Tech</div><div class="ml">+ CBT Ready</div></div>
+            </div>
+          </div>
+          <!-- Floating badges -->
+          <div class="fbadge f1">
+            <div class="fb-ico" style="background:rgba(11,107,69,.2)">✅</div>
+            <div><div class="fb-t">Zero Cost</div><div class="fb-s">to your school</div></div>
+          </div>
+          <div class="fbadge f2">
+            <div class="fb-ico" style="background:rgba(196,125,10,.2)">🏆</div>
+            <div><div class="fb-t">JAMB Ready</div><div class="fb-s">CBT Simulation</div></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── MARQUEE ──────────────────────────────────────────────────────── -->
-<div class="marquee-strip">
-  <div class="marquee-track">
-    <span class="accent">EduLab Nigeria</span>
-    <span>CBT Exam Preparation</span>
-    <span class="accent">·</span>
-    <span>Practical Tech Training</span>
-    <span class="accent">·</span>
-    <span>Zero Cost to Schools</span>
-    <span class="accent">·</span>
-    <span>JAMB · WAEC · NECO</span>
-    <span class="accent">·</span>
-    <span>Python · AI · Machine Learning</span>
-    <span class="accent">·</span>
-    <span>Ondo · Osun · Southwest Nigeria</span>
-    <span class="accent">·</span>
-    <!-- duplicate for seamless loop -->
-    <span class="accent">EduLab Nigeria</span>
-    <span>CBT Exam Preparation</span>
-    <span class="accent">·</span>
-    <span>Practical Tech Training</span>
-    <span class="accent">·</span>
-    <span>Zero Cost to Schools</span>
-    <span class="accent">·</span>
-    <span>JAMB · WAEC · NECO</span>
-    <span class="accent">·</span>
-    <span>Python · AI · Machine Learning</span>
-    <span class="accent">·</span>
-    <span>Ondo · Osun · Southwest Nigeria</span>
-    <span class="accent">·</span>
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-track">
+    <span class="a">EduLab Nigeria</span><span>World-Class Tech Skills</span><span class="a">·</span>
+    <span>CBT Exam Preparation</span><span class="a">·</span><span>Zero Cost to Schools</span><span class="a">·</span>
+    <span>JAMB · WAEC · NECO</span><span class="a">·</span><span>Python · AI · Machine Learning</span><span class="a">·</span>
+    <span>Global Tech Opportunities</span><span class="a">·</span><span>Ondo · Osun · Southwest Nigeria</span><span class="a">·</span>
+    <span>20–50 Computers Per Lab</span><span class="a">·</span><span>Future-Ready Students</span><span class="a">·</span>
+    <span class="a">EduLab Nigeria</span><span>World-Class Tech Skills</span><span class="a">·</span>
+    <span>CBT Exam Preparation</span><span class="a">·</span><span>Zero Cost to Schools</span><span class="a">·</span>
+    <span>JAMB · WAEC · NECO</span><span class="a">·</span><span>Python · AI · Machine Learning</span><span class="a">·</span>
+    <span>Global Tech Opportunities</span><span class="a">·</span><span>Ondo · Osun · Southwest Nigeria</span><span class="a">·</span>
+    <span>20–50 Computers Per Lab</span><span class="a">·</span><span>Future-Ready Students</span><span class="a">·</span>
   </div>
 </div>
 
-<!-- ── HOW IT WORKS ─────────────────────────────────────────────────── -->
-<section class="section" id="how">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="tag tag-blue">The Model</span>
-      <h2>Simple. Sustainable.<br/>Built for Nigerian Schools.</h2>
-      <p>No capital outlay. No hidden fees. Just a genuine partnership that benefits your school, your students, and your community.</p>
-    </div>
-    <div class="steps-grid reveal">
-      <div class="step">
-        <span class="step-num">01</span>
-        <div class="step-icon" style="background:#EBF5FF;">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 10l8-6 8 6v10a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1V10Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3>We Find Your School</h3>
-        <p>We identify private primary or secondary schools without a functional ICT lab. You apply — we review your school profile and schedule a free visit.</p>
+<!-- NUMBERS STRIP -->
+<section class="sec nums-bg" style="padding:60px 0">
+  <div class="ctn">
+    <div class="nums-grid rev">
+      <div class="num-item">
+        <div class="num-v">₦<em>0</em></div>
+        <div class="num-l">Capital cost<br/>to your school</div>
       </div>
-      <div class="step">
-        <span class="step-num">02</span>
-        <div class="step-icon" style="background:#D4F5E9;">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5.5 12.5c1.1 1.1 2.3 1.5 3.8 1.5 1.5 0 2.7-.4 3.8-1.5l1.4 1.4c-1.4 1.4-3.1 2.1-5.2 2.1-2 0-3.8-.8-5.2-2.1l1.4-1.4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M18.5 11.5c-1.1-1.1-2.3-1.5-3.8-1.5-1.5 0-2.7.4-3.8 1.5l-1.4-1.4c1.4-1.4 3.1-2.1 5.2-2.1 2 0 3.8.8 5.2 2.1l-1.4 1.4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M8.5 15.5l7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3>We Sign a BOT Agreement</h3>
-        <p>You provide one room and mains power. We bring everything else — computers, UPS backup, networking, projector, and software. The lab is up in 30 days.</p>
+      <div class="num-item">
+        <div class="num-v"><em>20–50</em></div>
+        <div class="num-l">Computers installed<br/>based on enrolment</div>
       </div>
-      <div class="step">
-        <span class="step-num">03</span>
-        <div class="step-icon" style="background:#FEF3C7;">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M7 6v-2h10v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M8 18h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Your School Uses the Lab Freely</h3>
-        <p>The lab belongs to EduLab — but your school can use the systems for any school activity during non-training hours. It becomes your school's ICT facility.</p>
+      <div class="num-item">
+        <div class="num-v"><em>9</em></div>
+        <div class="num-l">Years of progressive<br/>training (Pry3–SS2)</div>
       </div>
-      <div class="step">
-        <span class="step-num">04</span>
-        <div class="step-icon" style="background:#EBF5FF;">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 6h12v12H6V6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M6 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M9 12v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>We Train Your Students</h3>
-        <p>Our certified instructors deliver 2 hours of structured tech training per class weekly — covering digital skills, AI, and intensive CBT exam practice for JAMB, WAEC, and NECO.</p>
-      </div>
-      <div class="step">
-        <span class="step-num">05</span>
-        <div class="step-icon" style="background:#D4F5E9;">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="4" y="7" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M12 7v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M9 9h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M9 15h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Students Pay a Small Term Fee</h3>
-        <p>Students pay ₦10,000 per term — a fraction of any textbook bundle. That fee is our revenue. You pay nothing. Your school gets a fully-equipped lab and trained students.</p>
-      </div>
-      <div class="step">
-        <span class="step-num">06</span>
-        <div class="step-icon" style="background:#FEF3C7;">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 16l-2 6 6-2 8-14-6 2-6 8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M13 11l6-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Your Students Gain a Real Edge</h3>
-        <p>By SS2, EduLab students have built real AI/ML projects, practised hundreds of CBT exam questions, and earned a verified digital skills certificate. That is a career head-start.</p>
+      <div class="num-item">
+        <div class="num-v"><em>∞</em></div>
+        <div class="num-l">Tech opportunities<br/>unlocked per student</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── WHAT SCHOOLS GET ─────────────────────────────────────────────── -->
-<section class="section offers-bg" id="schools">
-  <div class="container">
-    <div class="section-head reveal" style="color:white;">
-      <span class="tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.15);">For Schools</span>
-      <h2 style="color:white;">Everything Your School<br/>Gets — For Free.</h2>
-      <p style="color:rgba(255,255,255,0.55);">A complete ICT infrastructure, a trained instructor, and a curriculum that puts your school ahead of every competitor in your city.</p>
+<!-- HOW IT WORKS -->
+<section class="sec how-bg" id="how">
+  <div class="ctn">
+    <div class="rev">
+      <div class="sec-chip chip-b">The Model</div>
+      <h2 class="sec-h">Simple. Sustainable.<br/><em>Built to Change Lives.</em></h2>
+      <p class="sec-sub">No capital outlay. No hidden costs. A genuine partnership where schools win, students gain world-class tech skills, and EduLab earns its keep.</p>
     </div>
-    <div class="offers-grid reveal">
-      <div class="offer-card">
-        <div class="ico">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="4" y="5" width="16" height="11" rx="2" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M8 19h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M12 16v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
+    <div class="steps rev d1">
+      <div class="srow">
+        <div class="srow-num">1</div>
+        <div class="srow-body">
+          <span class="srow-tag" style="background:#EBF5FF;color:#0C4A8A">Selection</span>
+          <h3>We Find Your School</h3>
+          <p>We identify private schools in Ondo and Osun States without a functional ICT lab. You apply — we visit, assess your space, and confirm the partnership within days.</p>
         </div>
-        <h3>A Fully-Equipped ICT Lab</h3>
-        <p>EduLab installs and owns everything. You provide the room — we provide the rest.</p>
+      </div>
+      <div class="srow">
+        <div class="srow-num">2</div>
+        <div class="srow-body">
+          <span class="srow-tag" style="background:#D4F5E9;color:#0B6B45">Agreement</span>
+          <h3>We Sign a 3-Year BOT Deal</h3>
+          <p>You give us one room and mains power. We install 20 to 50 computers (scaled to your student population), UPS backup, networking, projector, and all software — within 30 days, at no cost to you.</p>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="srow-num">3</div>
+        <div class="srow-body">
+          <span class="srow-tag" style="background:#FEF3C7;color:#C47D0A">Free Use</span>
+          <h3>Your School Uses the Lab Freely</h3>
+          <p>The equipment belongs to EduLab — but your school uses the computers freely during non-training hours for lessons, school exams, admin, or any purpose. It becomes your school's ICT facility in every practical sense.</p>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="srow-num">4</div>
+        <div class="srow-body">
+          <span class="srow-tag" style="background:#EBF5FF;color:#0C4A8A">Training</span>
+          <h3>We Train Every Student</h3>
+          <p>Certified EduLab instructors deliver 2 hours of structured tech training per class per week — Python, AI, and machine learning — building real, employable skills alongside intensive CBT practice for JAMB, WAEC, and NECO.</p>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="srow-num">5</div>
+        <div class="srow-body">
+          <span class="srow-tag" style="background:#D4F5E9;color:#0B6B45">Revenue</span>
+          <h3>Students Pay a Small Term Fee</h3>
+          <p>Students pay ₦10,000 per term — less than one textbook bundle. The school pays nothing. That fee is EduLab's revenue. The school gains a world-class lab and trained students at zero cost.</p>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="srow-num">6</div>
+        <div class="srow-body">
+          <span class="srow-tag" style="background:#FEF3C7;color:#C47D0A">Outcome</span>
+          <h3>Students Gain a Real, Lasting Edge</h3>
+          <p>By SS2, EduLab graduates have built real AI and machine learning projects, sat hundreds of CBT mock exams, and hold a verified digital skills certificate — positioning them for tech jobs, freelance income, and global remote opportunities that no other school in their city offers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO FEATURE -->
+<section class="sec" style="background:var(--off);padding-top:0;padding-bottom:56px">
+  <div class="ctn">
+    <div class="photo-strip rev">
+      <div class="photo-card tall">
+        <img src="empty_lab_wit_desktops.png" alt="Students learning with computers" onerror="this.style.background='#1A3A60'"/>
+        <div class="photo-cap">Students in an EduLab-equipped classroom — Ondo State</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="photo-card" style="flex:1">
+          <img src="edulab_teacher_presentation.png" alt="CBT practice" style="height:160px" onerror="this.style.background='#1A3A60'"/>
+          <div class="photo-cap">CBT exam simulation + Python and AI training</div>
+        </div>
+        <div class="photo-card" style="flex:1">
+          <img src="Edulab_students_coding.png" alt="Tech training" style="height:160px" onerror="this.style.background='#1A3A60'"/>
+          <div class="photo-cap">AI and Machine Learning — from JSS1 upward</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT SCHOOLS GET -->
+<section class="sec get-bg" id="schools">
+  <div class="get-pattern"></div>
+  <div class="get-glow"></div>
+  <div class="ctn" style="position:relative;z-index:1">
+    <div class="rev">
+      <div class="sec-chip" style="background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12)">For Schools</div>
+      <h2 class="sec-h" style="color:#fff">Everything You Get —<br/><em style="color:var(--cyan)">All For Free.</em></h2>
+      <p class="sec-sub" style="color:rgba(255,255,255,.45)">A complete ICT infrastructure, world-class tech curriculum, and a badge that makes you the most forward-thinking school in your city.</p>
+    </div>
+    <div class="get-grid rev d1">
+      <div class="gc">
+        <div class="gc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M8 19h8M12 16v3"/></svg></div>
+        <h3>Functional ICT Lab</h3>
+        <p>We install and own everything. You provide a room and power — we handle the rest.</p>
         <ul>
-          <li>20 computers (Core i5, 8GB RAM)</li>
-          <li>UPS power backup — no blackout interruptions</li>
-          <li>Local area network + projector</li>
-          <li>CBT simulation software (JAMB, WAEC, NECO)</li>
-          <li>All maintenance and repairs by EduLab</li>
+          <li><span class="arr">→</span>20 to 50 computers scaled to your student population</li>
+          <li><span class="arr">→</span>UPS power backup — NEPA-proof</li>
+          <li><span class="arr">→</span>Local area network + projector</li>
+          <li><span class="arr">→</span>CBT software — JAMB, WAEC, NECO formats</li>
+          <li><span class="arr">→</span>All maintenance carried by EduLab</li>
         </ul>
       </div>
-      <div class="offer-card">
-        <div class="ico">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 9l9-4 9 4-9 4-9-4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M12 13v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M7 18h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Expert-Led Student Training</h3>
-        <p>A certified EduLab instructor teaches your students every week of the term.</p>
+      <div class="gc">
+        <div class="gc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-4 9 4-9 4-9-4Z"/><path d="M12 13v6"/><path d="M7 11.5v4l5 2 5-2v-4"/></svg></div>
+        <h3>Expert Weekly Training</h3>
+        <p>A certified instructor in your school every single teaching week.</p>
         <ul>
-          <li>2 hours per class per week — every teaching week</li>
-          <li>Structured curriculum from Primary 3 through SS2</li>
-          <li>AI and Machine Learning integrated from JSS1</li>
-          <li>JAMB/WAEC CBT mock examinations built-in</li>
-          <li>End-of-term student performance reports</li>
+          <li><span class="arr">→</span>2 hours per class per week — no skipped weeks</li>
+          <li><span class="arr">→</span>Python, AI &amp; ML — real skills, not just theory</li>
+          <li><span class="arr">→</span>Structured curriculum: Primary 3 through SS2</li>
+          <li><span class="arr">→</span>JAMB, WAEC &amp; NECO CBT mock exams every term</li>
+          <li><span class="arr">→</span>End-of-term performance reports</li>
         </ul>
       </div>
-      <div class="offer-card">
-        <div class="ico">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 6h8l1.5 4H6.5L8 6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M8.5 10.5v3a3.5 3.5 0 0 0 7 0v-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12 19v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>School Recognition & Visibility</h3>
-        <p>EduLab partner schools become recognised as tech-forward institutions in their state.</p>
+      <div class="gc">
+        <div class="gc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h8l2 5H6L8 6Z"/><path d="M8.5 11v3a3.5 3.5 0 0 0 7 0v-3"/><path d="M12 19v3"/></svg></div>
+        <h3>School Recognition</h3>
+        <p>Become a publicly recognised EduLab Partner School — a brand parents will seek out.</p>
         <ul>
-          <li>EduLab Partner School badge and certification</li>
-          <li>Annual inter-school tech hackathon participation</li>
-          <li>State-level media coverage for hackathon winners</li>
-          <li>Listed on the EduLab Nigeria partner school directory</li>
+          <li><span class="arr">→</span>Official EduLab Partner badge and certificate</li>
+          <li><span class="arr">→</span>Annual inter-school tech hackathon entry</li>
+          <li><span class="arr">→</span>State media coverage for top-performing schools</li>
+          <li><span class="arr">→</span>Partner school directory listing</li>
         </ul>
       </div>
-      <div class="offer-card">
-        <div class="ico">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 15l4-4 3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M7 19h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Competitive Enrolment Advantage</h3>
-        <p>Parents choose schools that prepare children for the future. EduLab makes you that school.</p>
+      <div class="gc">
+        <div class="gc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15l4-4 3 3 5-5"/><path d="M3 3v18h18"/></svg></div>
+        <h3>Enrolment Advantage</h3>
+        <p>Parents who want their children positioned for tech careers and global opportunities choose EduLab schools. Be first in your city.</p>
         <ul>
-          <li>Differentiate from schools without a functional ICT lab</li>
-          <li>Attract tech-aware, ambitious families</li>
-          <li>Improve JAMB and WAEC performance scores</li>
-          <li>First-mover advantage in your city before other schools apply</li>
+          <li><span class="arr">→</span>Stand out from every school without a working lab</li>
+          <li><span class="arr">→</span>Attract ambitious, tech-forward families</li>
+          <li><span class="arr">→</span>Improve JAMB and WAEC pass rates measurably</li>
+          <li><span class="arr">→</span>Produce graduates ready for tech jobs and freelance income</li>
+          <li><span class="arr">→</span>Limited slots per city — early movers win</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── CURRICULUM ──────────────────────────────────────────────────── -->
-<section class="section" id="curriculum" style="background:var(--cream);">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="tag tag-green">Curriculum</span>
-      <h2>From Primary 3 to SS2.<br/>Progressive. Practical. Proven.</h2>
-      <p>Our curriculum was developed with N-TECH Info Systems Ltd. and validated through the Federal Government's 3MTT programme — the only GenAI training framework in Southwest Nigeria.</p>
+<!-- CURRICULUM -->
+<section class="sec curr-bg" id="curriculum">
+  <div class="ctn">
+    <div class="rev">
+      <div class="sec-chip chip-g">Curriculum</div>
+      <h2 class="sec-h">Primary 3 to SS2.<br/><em>Skills That Open Doors.</em></h2>
+      <p class="sec-sub">Exam readiness is the floor, not the ceiling. Our curriculum builds Python developers, AI practitioners, and data analysts — starting in primary school. Built with N-TECH and validated through Nigeria's 3MTT GenAI programme.</p>
     </div>
-    <div class="reveal" style="overflow-x:auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
-      <table class="curriculum-table">
-        <thead>
-          <tr>
-            <th>Level</th>
-            <th>Core Course</th>
-            <th>AI / ML Track</th>
-            <th>CBT Preparation</th>
-          </tr>
-        </thead>
+    <div class="rev d1" style="margin-top:48px;overflow-x:auto;border-radius:var(--r2);box-shadow:var(--sh2);border:1px solid var(--border)">
+      <table class="ctable">
+        <thead><tr><th>Level</th><th>Core Course</th><th>AI / ML Track</th><th>CBT Preparation</th></tr></thead>
         <tbody>
-          <tr>
-            <td><span class="level-badge">Pry 3–4</span></td>
-            <td>Scratch Programming & Digital Basics</td>
-            <td class="ai-cell">AI Thinking, Sorting & Pattern Games</td>
-            <td class="exam-cell">Mouse, Keyboard, Navigation</td>
-          </tr>
-          <tr>
-            <td><span class="level-badge">Pry 5–6</span></td>
-            <td>Scratch + AI Concepts</td>
-            <td class="ai-cell">How Machines Learn (Teachable Machine)</td>
-            <td class="exam-cell">File Management, Typing Speed</td>
-          </tr>
-          <tr>
-            <td><span class="level-badge">JSS 1</span></td>
-            <td>Python (Beginner) + Web Basics</td>
-            <td class="ai-cell">Variables, Logic, ML Introduction</td>
-            <td class="exam-cell">NECO CBT Interface Practice</td>
-          </tr>
-          <tr>
-            <td><span class="level-badge">JSS 2</span></td>
-            <td>Python + Machine Learning Basics</td>
-            <td class="ai-cell">Train a Classifier with scikit-learn</td>
-            <td class="exam-cell">NECO / WAEC Mock CBT</td>
-          </tr>
-          <tr>
-            <td><span class="level-badge">JSS 3</span></td>
-            <td>Applied ML & AI Projects</td>
-            <td class="ai-cell">Linear Regression, Image Classification</td>
-            <td class="exam-cell">WAEC e-Testing Readiness</td>
-          </tr>
-          <tr>
-            <td><span class="level-badge">SS 1</span></td>
-            <td>ML, AI Core & Web Development</td>
-            <td class="ai-cell">Build & Deploy ML Model (Flask/Streamlit)</td>
-            <td class="exam-cell">WAEC + JAMB CBT Simulation</td>
-          </tr>
-          <tr>
-            <td><span class="level-badge">SS 2</span></td>
-            <td>ML, AI & Data Analysis (Capstone)</td>
-            <td class="ai-cell">End-to-End AI Project + Portfolio</td>
-            <td class="exam-cell">JAMB UTME Full CBT Mock</td>
-          </tr>
+          <tr><td><span class="lvlb">Pry 3–4</span></td><td>Scratch Programming &amp; Digital Basics</td><td class="ai-c">AI Thinking, Sorting &amp; Pattern Games</td><td class="ex-c">Mouse, Keyboard, Navigation</td></tr>
+          <tr><td><span class="lvlb">Pry 5–6</span></td><td>Scratch + AI Concepts</td><td class="ai-c">How Machines Learn (Teachable Machine)</td><td class="ex-c">File Management, Typing Speed</td></tr>
+          <tr><td><span class="lvlb">JSS 1</span></td><td>Python (Beginner) + Web Basics</td><td class="ai-c">Variables, Logic, ML Introduction</td><td class="ex-c">NECO CBT Interface Practice</td></tr>
+          <tr><td><span class="lvlb">JSS 2</span></td><td>Python + Machine Learning Basics</td><td class="ai-c">Train a Classifier with scikit-learn</td><td class="ex-c">NECO / WAEC Mock CBT</td></tr>
+          <tr><td><span class="lvlb">JSS 3</span></td><td>Applied ML &amp; AI Projects</td><td class="ai-c">Linear Regression, Image Classification</td><td class="ex-c">WAEC e-Testing Readiness</td></tr>
+          <tr><td><span class="lvlb">SS 1</span></td><td>ML, AI Core &amp; Web Development</td><td class="ai-c">Build &amp; Deploy ML Model (Flask/Streamlit)</td><td class="ex-c">WAEC + JAMB CBT Simulation</td></tr>
+          <tr><td><span class="lvlb">SS 2</span></td><td>ML, AI &amp; Data Analysis — Capstone</td><td class="ai-c">End-to-End AI Project + Portfolio</td><td class="ex-c">JAMB UTME Full CBT Mock</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="reveal" style="text-align:center; font-size:13px; color:var(--muted); margin-top:20px;">Every student receives a printed course manual, N-TECH/EduLab completion certificate, and entry into the Annual EduLab Hackathon.</p>
+    <p class="rev" style="text-align:center;font-size:13px;color:var(--muted);margin-top:18px">Every student receives a course manual, an N-TECH/EduLab certificate, and entry into the Annual EduLab Hackathon — with top performers eligible for tech internship referrals.</p>
   </div>
 </section>
 
-<!-- ── ELIGIBILITY ────────────────────────────────────────────────── -->
-<section class="section" style="background:var(--white);">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="tag tag-amber">Who Qualifies</span>
-      <h2>Is Your School<br/>a Good Fit?</h2>
-      <p>We are currently accepting applications from schools in Ondo and Osun States. Here's what we look for.</p>
+<!-- ELIGIBILITY -->
+<section class="sec" style="background:var(--white)">
+  <div class="ctn">
+    <div class="rev">
+      <div class="sec-chip chip-a">Who Qualifies</div>
+      <h2 class="sec-h">Is Your School<br/><em>a Good Fit?</em></h2>
+      <p class="sec-sub">Accepting applications from schools in Ondo and Osun States. Here is what we look for.</p>
     </div>
-    <div class="eligibility-grid reveal">
-      <div class="eligibility-card">
-        <div class="check">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 10l8-6 8 6v10a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1V10Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+    <div class="el-grid rev d1">
+      <div class="elc"><div class="elc-n">1</div>
+        <div class="elc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10l8-6 8 6v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V10Z"/><path d="M9 22V12h6v10"/></svg></div>
         <h3>Private School</h3>
-        <p>Any registered private primary or secondary school — or a combined primary/secondary school — is eligible to apply.</p>
+        <p>Any registered private primary, secondary, or combined school is eligible — regardless of size.</p>
       </div>
-      <div class="eligibility-card">
-        <div class="check">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M17 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Minimum 100 Students</h3>
-        <p>Your school should have at least 100 enrolled students to make the programme financially viable for both parties.</p>
+      <div class="elc"><div class="elc-n">2</div>
+        <div class="elc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>100+ Students</h3>
+        <p>At least 100 enrolled students ensures the programme works financially for both parties.</p>
       </div>
-      <div class="eligibility-card">
-        <div class="check">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M8 8l8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
+      <div class="elc"><div class="elc-n">3</div>
+        <div class="elc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 6V4M12 6V4M17 6V4"/></svg></div>
         <h3>No Functional ICT Lab</h3>
-        <p>Schools without a working computer lab are our priority. If you have one, we can still discuss a curriculum-only partnership.</p>
+        <p>Schools without a working lab are our first priority. Outdated labs may also qualify.</p>
       </div>
-      <div class="eligibility-card">
-        <div class="check">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 2h4v6h-4V2Z" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M9 8h6l-1 5h-4l-1-5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M8 13h8v7H8v-7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3>A Spare Room + Power</h3>
-        <p>You need one dedicated room of at least 40sqm and a stable mains power connection. We handle everything else.</p>
+      <div class="elc"><div class="elc-n">4</div>
+        <div class="elc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 9h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/><path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2"/></svg></div>
+        <h3>One Room + Power</h3>
+        <p>A dedicated room (at least 40sqm) and mains power. We bring UPS backup — NEPA is not an excuse.</p>
       </div>
-      <div class="eligibility-card">
-        <div class="check">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 21s7-4.5 7-10a7 7 0 1 0-14 0c0 5.5 7 10 7 10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-            <circle cx="12" cy="9" r="2" fill="currentColor"/>
-          </svg>
-        </div>
+      <div class="elc"><div class="elc-n">5</div>
+        <div class="elc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 21s7-4.5 7-10a7 7 0 1 0-14 0c0 5.5 7 10 7 10Z"/><circle cx="12" cy="9" r="2" fill="currentColor"/></svg></div>
         <h3>Ondo or Osun State</h3>
-        <p>We are currently deploying in Ondo and Osun States. Schools in other Southwest states can join the waitlist.</p>
+        <p>Deploying now in both states. Other Southwest schools can join the expansion waitlist.</p>
       </div>
-      <div class="eligibility-card">
-        <div class="check">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 22c5-1 8-6 8-11V5l-8-3-8 3v6c0 5 3 10 8 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+      <div class="elc"><div class="elc-n">6</div>
+        <div class="elc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5-1 8-6 8-11V5l-8-3-8 3v6c0 5 3 10 8 11Z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3>Committed Proprietor</h3>
-        <p>A 3-year BOT partnership requires buy-in from the school proprietor or principal. It is a long-term commitment — and the benefits compound over time.</p>
+        <p>A 3-year BOT partnership requires genuine leadership buy-in. Schools that are serious rise to the top of our list.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── CEO ─────────────────────────────────────────────────────────── -->
-<section class="section" id="about">
-  <div class="container">
-    <div class="ceo-section reveal">
-      <div>
-        <p style="font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px;">From the CEO</p>
-        <div class="ceo-quote">
-          I have spent years watching bright Nigerian students fail JAMB and WAEC — not because they weren't smart, but because they had never touched a computer before the exam. EduLab exists to end that. We bring the lab to the child, not the other way around.
-        </div>
-        <div class="ceo-info">
-          <span class="ceo-name">Sharafdeen Quadri Olalekan</span>
-          <span class="ceo-role">Founder & CEO, EduLab Nigeria</span>
+<!-- CEO -->
+<section class="sec" id="about" style="background:var(--sand)">
+  <div class="ctn">
+    <div class="ceo-wrap rev">
+      <div class="ceo-orb"></div>
+      <div style="position:relative;z-index:1">
+        <div class="ceo-label">From the Founder &amp; CEO</div>
+        <div class="ceo-q">I have spent years watching bright Nigerian students fail JAMB exams and miss tech opportunities — not because they weren't capable, but because the tools were never brought to them. EduLab changes that. We bring the lab, the skills, and the future directly into their school.</div>
+        <div class="ceo-by">
+          <div class="nm">Sharafdeen Quadri Olalekan</div>
+          <div class="rl">Founder &amp; CEO — EduLab Nigeria</div>
         </div>
       </div>
-      <div>
+      <div style="position:relative;z-index:1">
         <div class="ceo-card">
-          <img src="pp.jpg" alt="Sharafdeen Quadri Olalekan" class="ceo-photo"/>
-          <h4><a href="https://quaddev.onrender.com" target="_blank" rel="noopener noreferrer">Sharafdeen Quadri Olalekan</a></h4>
-          <div class="title">Founder & CEO</div>
-          <p>Full-stack developer, technology educator, and Branch Manager at N-TECH Info Systems Ltd. with 3+ years training students in Ondo and Osun States. Architect of N-TECH's school partnership curriculum and CBT preparation programme.</p>
-          <a class="profile-link" href="https://quaddev.onrender.com" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 14l6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M10 8h4v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M16 16h2a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M8 16h-2a2 2 0 0 1-2-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+          <div class="ceo-av" style="background:url('founder.jpg') center/cover no-repeat;"></div>
+          <h4><a href="https://quaddev.onrender.com" target="_blank" rel="noopener">Sharafdeen Quadri Olalekan</a></h4>
+          <div class="ct">Founder &amp; CEO</div>
+          <p>Full-stack developer, tech educator, and Branch Manager at N-TECH Info Systems Ltd., Akure — with 3+ years training students across Ondo and Osun States. Architect of N-TECH's school partnership curriculum and CBT preparation programme.</p>
+          <a class="ceo-lnk" href="https://quaddev.onrender.com" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1.5 5.5h8M6 2l3.5 3.5L6 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             quaddev.onrender.com
           </a>
         </div>
@@ -963,183 +954,164 @@ footer {
   </div>
 </section>
 
-<!-- ── APPLICATION FORM ──────────────────────────────────────────── -->
-<section class="section form-section" id="apply">
-  <div class="container">
-    <div class="form-wrapper reveal">
-      <span class="tag tag-blue" style="margin-bottom:20px;display:inline-flex; align-items:center; gap:8px;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 4h9v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          <rect x="5" y="6" width="12" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/>
-          <path d="M9 10h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          <path d="M9 14h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-        School Partnership Application
-      </span>
-      <h2 class="form-title">Apply to Partner<br/>With EduLab</h2>
-      <p class="form-sub">Fill in the form below. Our team will review your school profile and contact you within 5 working days to schedule a free school visit.</p>
-
-      <div id="application-form">
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="school-name">School Name *</label>
-            <input type="text" id="school-name" placeholder="e.g. Sunshine Academy" required/>
-          </div>
-          <div class="form-group">
-            <label for="proprietor">Proprietor / Principal Name *</label>
-            <input type="text" id="proprietor" placeholder="Full name" required/>
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone Number *</label>
-            <input type="tel" id="phone" placeholder="+234 ..." required/>
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address *</label>
-            <input type="email" id="email" placeholder="school@example.com" required/>
-          </div>
-          <div class="form-group">
-            <label for="state">State *</label>
-            <select id="state" required>
+<!-- FORM -->
+<section class="sec form-bg" id="apply">
+  <div class="ctn">
+    <div class="form-wrap rev">
+      <div class="sec-chip chip-b" style="margin-bottom:20px">School Partnership Application</div>
+      <h2 class="form-h">Apply to Partner<br/>With EduLab</h2>
+      <p class="form-s">Fill in the details below. We review your profile and reach out within 5 working days to arrange a free visit.</p>
+      <div id="appform">
+        <div class="fgrid">
+          <div class="fg"><label>School Name *</label><input type="text" id="f1" placeholder="e.g. Sunshine Academy" required/></div>
+          <div class="fg"><label>Proprietor / Principal *</label><input type="text" id="f2" placeholder="Full name" required/></div>
+          <div class="fg"><label>Phone Number *</label><input type="tel" id="f3" placeholder="+234 ..." required/></div>
+          <div class="fg"><label>Email Address *</label><input type="email" id="f4" placeholder="school@example.com" required/></div>
+          <div class="fg"><label>State *</label>
+            <select id="f5" required>
               <option value="" disabled selected>Select state</option>
-              <option>Ondo State</option>
-              <option>Osun State</option>
+              <option>Ondo State</option><option>Osun State</option>
               <option>Other Southwest State (Waitlist)</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="lga">City / LGA *</label>
-            <input type="text" id="lga" placeholder="e.g. Akure, Osogbo, Ado-Ekiti" required/>
-          </div>
-          <div class="form-group">
-            <label for="type">School Type *</label>
-            <select id="type" required>
+          <div class="fg"><label>City / LGA *</label><input type="text" id="f6" placeholder="e.g. Akure, Osogbo" required/></div>
+          <div class="fg"><label>School Type *</label>
+            <select id="f7" required>
               <option value="" disabled selected>Select type</option>
-              <option>Primary School</option>
-              <option>Secondary School</option>
-              <option>Combined Primary & Secondary</option>
+              <option>Primary School</option><option>Secondary School</option>
+              <option>Combined Primary &amp; Secondary</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="students">Approximate Student Population *</label>
-            <select id="students" required>
+          <div class="fg"><label>Student Population *</label>
+            <select id="f8" required>
               <option value="" disabled selected>Select range</option>
-              <option>100 – 200 students</option>
-              <option>201 – 400 students</option>
-              <option>401 – 700 students</option>
-              <option>700+ students</option>
+              <option>100 – 200</option><option>201 – 400</option>
+              <option>401 – 700</option><option>700+</option>
             </select>
           </div>
-          <div class="form-group full">
-            <label for="lab">Current ICT Lab Status</label>
-            <select id="lab">
+          <div class="fg full"><label>ICT Lab Status</label>
+            <select id="f9">
               <option value="" disabled selected>Select status</option>
-              <option>No ICT lab at all</option>
-              <option>Outdated/non-functional lab</option>
-              <option>Functional lab but limited computers</option>
-              <option>Good lab — interested in curriculum partnership only</option>
+              <option>No ICT lab at all</option><option>Outdated / non-functional</option>
+              <option>Functional but limited computers</option>
+              <option>Good lab — curriculum partnership only</option>
             </select>
           </div>
-          <div class="form-group full">
-            <label for="message">Anything else you'd like us to know?</label>
-            <textarea id="message" placeholder="Tell us about your school, your students, or any questions you have..."></textarea>
+          <div class="fg full"><label>Anything else we should know?</label>
+            <textarea id="f10" placeholder="Tell us about your school, your students, or any questions..."></textarea>
           </div>
         </div>
-        <button class="form-submit" onclick="submitForm()">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <button class="sub-btn" onclick="doSub()">
           Submit Application
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <p class="form-note">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:6px;">
-            <rect x="7" y="11" width="10" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-          Your information is confidential and will only be used to assess your school's partnership eligibility.
-        </p>
+        <p class="fnote">🔒 Your information is confidential and used only to assess partnership eligibility.</p>
       </div>
-
-      <div class="form-success" id="form-success">
-        <div class="check-circle">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+      <div class="fsuccess" id="fsuccess">
+        <div class="fcheck">✅</div>
         <h3>Application Received!</h3>
-        <p>Thank you for applying. Our team will review your school profile and reach out within 5 working days to schedule a free visit.</p>
-        <p style="margin-top:12px; font-size:13px; color:var(--muted);">Questions? Email us at <strong>olalekanquadri58@gmail.com</strong></p>
+        <p>We'll review your school and reach out within 5 working days to arrange a free visit.</p>
+        <p style="margin-top:10px;font-size:13px;color:var(--muted)">Questions? <strong>olalekanquadri58@gmail.com</strong></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ─────────────────────────────────────────────────────── -->
+<!-- FOOTER -->
 <footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
+  <div class="ctn">
+    <div class="fg-grid">
+      <div class="fb-brand">
         <a href="#" class="logo">
-          <div class="logo-mark">
-            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="2" y="4" width="16" height="11" rx="2" stroke="white" stroke-width="1.5"/>
-              <path d="M7 15v2M13 15v2M5 17h10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M7 9l2 2 4-4" stroke="#7DD3FC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <span class="logo-text" style="color:white;">EduLab<span style="color:#2589D4;">Nigeria</span></span>
+          <div class="logo-m"><svg viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="11" rx="2" stroke="white" stroke-width="1.5"/><path d="M7 15v2M13 15v2M5 17h10" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M7 9l2 2 4-4" stroke="#05C3F9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span class="logo-t">EduLab<em>Nigeria</em></span>
         </a>
-        <p style="margin-top:16px;">We put computer labs in schools that can't afford one — and train every student inside them. Operating in Ondo & Osun States.</p>
+        <p>We install computer labs — 20 to 50 systems — in schools that can't afford one, equip every student with world-class tech skills, and prepare them for national exams and global opportunities. Building in Ondo &amp; Osun States.</p>
       </div>
-      <div class="footer-col">
+      <div class="fc">
         <h4>Navigate</h4>
-        <a href="#how">How It Works</a>
-        <a href="#schools">For Schools</a>
-        <a href="#curriculum">Curriculum</a>
-        <a href="#about">About</a>
-        <a href="#apply">Apply Now</a>
+        <a href="#how">How It Works</a><a href="#schools">For Schools</a>
+        <a href="#curriculum">Curriculum</a><a href="#about">About</a><a href="#apply">Apply Now</a>
       </div>
-      <div class="footer-col">
+      <div class="fc">
         <h4>Contact</h4>
-        <a href="mailto:hello@edulabng.com">hello@edulabng.com</a>
+        <a href="mailto:olalekanquadri58@gmail.com">olalekanquadri58@gmail.com</a>
         <a href="tel:+2349050829691">+234 905 082 9691</a>
-        <a href="tel:+2348067393450">+234 8067393450</a>
+        <a href="tel:+2348067393450">+234 806 739 3450</a>
         <a href="#">Akure, Ondo State</a>
         <a href="#">Osogbo, Osun State</a>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="fbot">
       <p>© 2026 EduLab Nigeria. All rights reserved.</p>
-      <span class="footer-badge">BUILD · OPERATE · TEACH</span>
+      <span class="fbot-badge">Build · Operate · Teach</span>
     </div>
   </div>
 </footer>
 
 <script>
-// Scroll nav shadow
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+// ── Custom cursor
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.cssText=`position:fixed;left:${mx}px;top:${my}px;pointer-events:none;z-index:9999;mix-blend-mode:exclusion;transform:translate(-50%,-50%)`
+  cur.querySelector('.cur-dot').style.cssText='width:8px;height:8px;background:#fff;border-radius:50%'
+});
+(function animR(){
+  rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animR);
+})();
+document.querySelectorAll('a,button,.gc,.srow,.elc').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';ring.style.borderColor='rgba(5,195,249,.8)'});
+  el.addEventListener('mouseleave',()=>{ring.style.width='40px';ring.style.height='40px';ring.style.borderColor='rgba(5,195,249,.6)'});
 });
 
-// Reveal on scroll
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// ── Scroll reveal
+const robs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting)e.target.classList.add('vis')
+}),{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>robs.observe(el));
 
-// Form submit (static — shows success state)
-function submitForm() {
-  const required = ['school-name','proprietor','phone','email','state','lga','type','students'];
-  let valid = true;
-  required.forEach(id => {
-    const el = document.getElementById(id);
-    if (!el.value.trim()) {
-      el.style.borderColor = '#EF4444';
-      valid = false;
-      el.addEventListener('input', () => el.style.borderColor = '', { once: true });
+// ── Parallax hero mesh
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  const m=document.querySelector('.hero-mesh');
+  if(m)m.style.transform=`translateY(${y*.3}px)`;
+});
+
+// ── 3D card mouse tilt
+const c3=document.getElementById('card3d');
+if(c3){
+  c3.parentElement.addEventListener('mousemove',e=>{
+    const r=c3.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width-.5)*20;
+    const y=((e.clientY-r.top)/r.height-.5)*-14;
+    c3.style.animation='none';
+    c3.style.transform=`rotateX(${y}deg) rotateY(${x}deg)`;
+  });
+  c3.parentElement.addEventListener('mouseleave',()=>{
+    c3.style.animation='floatCard 7s ease-in-out infinite';
+    c3.style.transform='';
+  });
+}
+
+// ── Form
+function doSub(){
+  const ids=['f1','f2','f3','f4','f5','f6','f7','f8'];
+  let ok=true;
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el.value.trim()){
+      el.style.borderColor='#EF4444';ok=false;
+      el.addEventListener('input',()=>el.style.borderColor='',{once:true});
     }
   });
-  if (!valid) { alert('Please fill in all required fields marked with *.'); return; }
-  document.getElementById('application-form').style.display = 'none';
-  document.getElementById('form-success').style.display = 'block';
-  window.scrollTo({ top: document.getElementById('apply').offsetTop - 80, behavior: 'smooth' });
+  if(!ok){alert('Please complete all required fields (*).');return;}
+  document.getElementById('appform').style.display='none';
+  const s=document.getElementById('fsuccess');s.style.display='block';
+  window.scrollTo({top:document.getElementById('apply').offsetTop-80,behavior:'smooth'});
 }
 </script>
 </body>
