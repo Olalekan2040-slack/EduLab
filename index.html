@@ -42,14 +42,7 @@ body::after{
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-/* ══ CURSOR ══ */
-.cur{position:fixed;pointer-events:none;z-index:9999;mix-blend-mode:exclusion}
-.cur-dot{width:8px;height:8px;background:#fff;border-radius:50%;transform:translate(-50%,-50%)}
-.cur-ring{
-  position:fixed;width:40px;height:40px;border-radius:50%;
-  border:1.5px solid rgba(5,195,249,.6);pointer-events:none;z-index:9998;
-  transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s
-}
+
 
 /* ══ NAV ══ */
 nav{position:fixed;top:0;inset-inline:0;z-index:100;padding:14px 24px}
@@ -238,11 +231,6 @@ nav{position:fixed;top:0;inset-inline:0;z-index:100;padding:14px 24px}
   position:absolute;inset:0;
   background:linear-gradient(180deg,transparent 40%,rgba(6,18,32,.85) 100%)
 }
-.lab-photo-caption{
-  position:absolute;bottom:14px;left:14px;
-  font-family:var(--font-m);font-size:10px;color:rgba(255,255,255,.6);
-  letter-spacing:.06em
-}
 
 /* mini metrics row */
 .sw-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
@@ -413,11 +401,6 @@ nav{position:fixed;top:0;inset-inline:0;z-index:100;padding:14px 24px}
 .photo-card img{width:100%;object-fit:cover;display:block;transition:transform .6s;height:340px}
 .photo-card.tall img{height:100%}
 .photo-card:hover img{transform:scale(1.04)}
-.photo-cap{
-  position:absolute;bottom:0;left:0;right:0;
-  background:linear-gradient(transparent,rgba(7,16,30,.75));
-  padding:40px 20px 16px;color:#fff;font-size:13px;font-weight:500
-}
 
 /* ══ NUMBERS ══ */
 .nums-bg{background:var(--navy)}
@@ -554,9 +537,6 @@ footer{background:#040D1A;padding:72px 0 32px}
 </head>
 <body>
 
-<div class="cur" id="cur"><div class="cur-dot"></div></div>
-<div class="cur-ring" id="cur-ring"></div>
-
 <!-- NAV -->
 <nav>
   <div class="nav-pill">
@@ -648,7 +628,6 @@ footer{background:#040D1A;padding:72px 0 32px}
                 alt="Students in computer lab"
                 onerror="this.style.display='none'"/>
               <div class="lab-photo-overlay"></div>
-              <div class="lab-photo-caption">EduLab Partner School · Akure, Ondo State</div>
             </div>
             <div class="sw-metrics">
               <div class="sw-metric"><div class="mv">4</div><div class="ml">Schools</div></div>
@@ -778,16 +757,13 @@ footer{background:#040D1A;padding:72px 0 32px}
     <div class="photo-strip rev">
       <div class="photo-card tall">
         <img src="empty_lab_wit_desktops.png" alt="Students learning with computers" onerror="this.style.background='#1A3A60'"/>
-        <div class="photo-cap">Students in an EduLab-equipped classroom — Ondo State</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:14px">
         <div class="photo-card" style="flex:1">
           <img src="edulab_teacher_presentation.png" alt="CBT practice" style="height:160px" onerror="this.style.background='#1A3A60'"/>
-          <div class="photo-cap">CBT exam simulation + Python and AI training</div>
         </div>
         <div class="photo-card" style="flex:1">
           <img src="Edulab_students_coding.png" alt="Tech training" style="height:160px" onerror="this.style.background='#1A3A60'"/>
-          <div class="photo-cap">AI and Machine Learning — from JSS1 upward</div>
         </div>
       </div>
     </div>
@@ -1050,25 +1026,11 @@ footer{background:#040D1A;padding:72px 0 32px}
 </footer>
 
 <script>
-// ── Custom cursor
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX;my=e.clientY;
-  cur.style.cssText=`position:fixed;left:${mx}px;top:${my}px;pointer-events:none;z-index:9999;mix-blend-mode:exclusion;transform:translate(-50%,-50%)`
-  cur.querySelector('.cur-dot').style.cssText='width:8px;height:8px;background:#fff;border-radius:50%'
-});
-(function animR(){
-  rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
-  ring.style.left=rx+'px';ring.style.top=ry+'px';
-  requestAnimationFrame(animR);
-})();
-document.querySelectorAll('a,button,.gc,.srow,.elc').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';ring.style.borderColor='rgba(5,195,249,.8)'});
-  el.addEventListener('mouseleave',()=>{ring.style.width='40px';ring.style.height='40px';ring.style.borderColor='rgba(5,195,249,.6)'});
-});
-
 // ── Scroll reveal
+const robs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting)e.target.classList.add('vis')
+}),{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>robs.observe(el));
 const robs=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting)e.target.classList.add('vis')
 }),{threshold:.08});
