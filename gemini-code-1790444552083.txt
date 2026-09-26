@@ -1,0 +1,211 @@
+================================================================================
+FULL-SESSION PRACTICAL DIGITAL SKILLS CURRICULUM (JSS1 - SSS3)
+24 WEEKS TOTAL | 3 TERMS PER SESSION | 8 WEEKS PER TERM
+RESOURCE CONSTRAINTS: 20 COMPUTERS, 2 TEACHERS, 200+ STUDENTS (OFFLINE)
+WEEKLY ALLOCATION: 80-120 MINUTES PER CLASS | LAB ROTATION: 2-3 STUDENT PODS
+================================================================================
+
+--------------------------------------------------------------------------------
+JSS1: FUNDAMENTALS OF INFORMATION TECHNOLOGY & OFFICE APPLICATIONS
+Assigned Software: LibreOffice Writer, LibreOffice Calc, LibreOffice Impress
+--------------------------------------------------------------------------------
+[TERM 1: HARDWARE SYSTEMS & WORD PROCESSING MECHANICS]
+Week 1: Computer Architecture (Input/Output units, CPU, storage, safe startup/shutdown).
+Week 2: Operating Systems & File Management (Directory trees, folder naming conventions).
+Week 3: Keyboard & Touch Typing Mastery (Home row discipline, posture, shortcuts).
+Week 4: Document Creation & Formatting (Margins, line spacing, font hierarchies, alignment).
+Week 5: Tables & Structural Elements (Multi-column tables, cell merging, borders).
+Week 6: Graphic Embedding & Media Handling (Image insertion, text wrapping, canvas layout).
+Week 7: Document Proofing & PDF Export (Spellcheck, headers/footers, page numbers, PDF export).
+Week 8: TERM 1 PROJECT (Format and export a multi-page 'Class Science Journal' PDF).
+
+[TERM 2: SPREADSHEET ARCHITECTURE & DATA MODELING]
+Week 9: Spreadsheet Fundamentals (Grid coordinates, entering labels vs numeric data).
+Week 10: Mathematical Operators & Basic Formulas (Explicit formulas: +, -, *, /).
+Week 11: Core Statistical Functions (SUM, AVERAGE, MIN, MAX, COUNT operations).
+Week 12: Relative vs. Absolute Cell Referencing (Cell reference locking using $A$1).
+Week 13: Data Formatting & Visual Styles (Number formatting, currencies, cell shading).
+Week 14: Data Visualization (Bar, Column, and Pie charts; legend and axis setup).
+Week 15: Sorting & Filter Controls (Alphabetical/numerical sorting, dynamic filtering).
+Week 16: TERM 2 PROJECT (Build an automated 'Academic Grade Analysis Sheet').
+
+[TERM 3: PRESENTATION DESIGN & DIGITAL RESEARCH]
+Week 17: Presentation Design Fundamentals (Slide masters, layouts, slide hierarchy).
+Week 18: Media & Table Integration (Inserting photos, custom graphics, data tables).
+Week 19: Transitions & Animations (Entrance/exit effects, timing, click triggers).
+Week 20: Speaker Notes & Slide Customization (Uniform fonts, colors, presenter notes).
+Week 21: Offline Research & Data Gathering (Querying Kiwix offline encyclopedias).
+Week 22: Presentation Delivery Mechanics (Slide Show controls, speaker tools, delivery).
+Week 23: Cyber Ethics & Data Safety (Malware vectors, strong passwords, backup rules).
+Week 24: TERM 3 PROJECT (Design and deliver a 6-slide presentation on 'Renewable Energy').
+
+--------------------------------------------------------------------------------
+JSS2: ADVANCED SPREADSHEETS, DATABASES & ALGORITHMIC THINKING
+Assigned Software: LibreOffice Calc, LibreOffice Base / SQLite, Scratch 3.0 Desktop
+--------------------------------------------------------------------------------
+[TERM 1: ADVANCED SPREADSHEETS & LOGICAL FUNCTIONS]
+Week 1: Review of Spreadsheet Analytics (Formula audit tools, cell dependencies).
+Week 2: Single-Condition Logic (Writing IF statements: =IF(cell >= value, "Pass", "Fail")).
+Week 3: Multi-Branching Logic (Constructing nested IF statements for grading).
+Week 4: Conditional Formatting Rules (Dynamic cell highlighting based on conditions).
+Week 5: Data Validation & Controls (Input restrictions, dropdown lists, numeric ranges).
+Week 6: Lookup Operations (VLOOKUP syntax, lookup values, table arrays, column indices).
+Week 7: Text & Date Functions (CONCATENATE, LEFT, RIGHT, UPPER, date math).
+Week 8: TERM 1 PROJECT (Construct an automated 'School Inventory & Sales Ledger').
+
+[TERM 2: DATABASE SYSTEMS & RELATIONAL MODELING]
+Week 9: Intro to Database Management Systems (Relational databases, tables, keys).
+Week 10: Entity-Relationship Modeling (Entities, attributes, primary/foreign keys).
+Week 11: Database Table Design (Field properties, data types, input constraints).
+Week 12: Data Entry Interfaces (Designing user-friendly form layouts).
+Week 13: Querying Databases (Building parameter queries to filter records).
+Week 14: Multi-Table Query Joins (Connecting foreign keys to pull combined data).
+Week 15: Database Report Generation (Formatting query output into printable PDF reports).
+Week 16: TERM 2 PROJECT (Create a 'Library Management Database' with forms and queries).
+
+[TERM 3: ALGORITHMIC LOGIC & FLOWCHARTING]
+Week 17: Introduction to Algorithms (Step-by-step instructions, deterministic logic).
+Week 18: Pseudocode Conventions (Structured START, INPUT, IF/ELSE, WHILE, END logic).
+Week 19: Flowchart Standard Notation (Oval, Parallelogram, Rectangle, Diamond symbols).
+Week 20: Converting Logic to Visual Blocks (Mapping algorithms to Scratch code).
+Week 21: Sequence, Selection, and Iteration (Loops and conditional blocks in code).
+Week 22: Algorithmic Problem Solving (Sorting numbers, string processing logic).
+Week 23: Debugging & Trace Tables (Stepping through variables manually to find bugs).
+Week 24: TERM 3 PROJECT (Design a flowchart and Scratch script for a GPA Calculator).
+
+--------------------------------------------------------------------------------
+JSS3: WEB FOUNDATIONS (HTML/CSS) & COMPUTER NETWORKS
+Assigned Software: VS Code / Notepad++, Web Browsers, Scratch 3.0 Desktop
+--------------------------------------------------------------------------------
+[TERM 1: HTML5 DOCUMENT STRUCTURE & SEMANTIC WEB]
+Week 1: Web Architecture Fundamentals (Client browsers, servers, HTTP cycles).
+Week 2: HTML Document Anatomy (<!DOCTYPE html>, <html>, <head>, <title>, <body>).
+Week 3: Content Markup & Typography (Headings, paragraphs, line breaks, semantic tags).
+Week 4: Lists & Structural Containers (Ordered <ol>, unordered <ul>, list items <li>).
+Week 5: Hyperlinks & Path References (Absolute URLs, relative paths, anchor tags <a>).
+Week 6: Embedding Media Elements (Images <img>, alt attributes, figure captions).
+Week 7: Structural HTML Tables (Tables <table>, headers <th>, rows <tr>, cells <td>).
+Week 8: TERM 1 PROJECT (Code a semantic multi-page website: 'My Community Guide').
+
+[TERM 2: CASCADING STYLE SHEETS (CSS3) DESIGN]
+Week 9: Introduction to CSS (Inline, Internal <style>, External <link> stylesheets).
+Week 10: CSS Selector Rules (Element, Class .class, ID #id selectors, specificity).
+Week 11: Color Systems & Typography (Hex codes, RGB, font-family, line-height).
+Week 12: The CSS Box Model (Margin, Border, Padding, and Content Area mechanics).
+Week 13: CSS Layout Mechanics (Display properties, positioning rules).
+Week 14: Flexbox Architecture Fundamentals (Flex containers, justify-content, align-items).
+Week 15: Form Creation & Styling (Building HTML forms with CSS styling).
+Week 16: TERM 2 PROJECT (Style 'My Community Guide' using Flexbox and external CSS).
+
+[TERM 3: COMPUTER NETWORKING & CYBER INFRASTRUCTURE]
+Week 17: Computer Network Topologies (LAN, WAN, MAN; Star, Bus, Mesh, Ring topologies).
+Week 18: Networking Hardware Devices (Routers, Switches, Access Points, NICs, cables).
+Week 19: IP Addressing & Protocol Basics (IPv4/IPv6, MAC addresses, DNS, DHCP).
+Week 20: Internet Services & Protocols (Web browsers, SMTP, IMAP, FTP, HTTPS).
+Week 21: Cybersecurity Vulnerabilities (Viruses, worms, trojans, ransomware, phishing).
+Week 22: Network Defense Systems (Firewalls, antivirus setup, encryption, permissions).
+Week 23: BECE Examination Prep & Practical Assessment (Core concepts review).
+Week 24: TERM 3 PROJECT (Build a personal portfolio website with networking summary).
+
+--------------------------------------------------------------------------------
+SSS1: PYTHON PROGRAMMING & DATA ANALYTICS
+Assigned Software: Python 3.x IDLE / VS Code, Jupyter Notebooks (Offline)
+--------------------------------------------------------------------------------
+[TERM 1: CORE PYTHON SYNTAX & DATA TYPES]
+Week 1: Python Environment Setup (Interpreters vs compilers, running scripts via CLI).
+Week 2: Variables & Primitive Types (Assignment, integers, floats, strings, booleans).
+Week 3: User Input & Type Casting (input(), type conversions int(), float(), str()).
+Week 4: Arithmetic & Comparison Operators (Math operations and boolean relational checks).
+Week 5: Control Flow (Structural branching using if, elif, and else blocks).
+Week 6: Iteration Mechanics (Definitive looping with for loops and range()).
+Week 7: Indefinite Iteration & Loop Control (while loops, break, continue, pass).
+Week 8: TERM 1 PROJECT (Program a CLI 'Grade Calculator & CGPA Tracker').
+
+[TERM 2: DATA STRUCTURES & STRING PROCESSING]
+Week 9: Sequence Operations & Strings (String indexing, slicing syntax, methods).
+Week 10: Python Lists (Creating lists, appending, popping, updating indices).
+Week 11: List Comprehension (Inline filtered list transformations).
+Week 12: Tuples & Sets (Immutability, tuple unpacking, set uniqueness operations).
+Week 13: Python Dictionaries (Key-value pairs, nested dictionaries, iteration).
+Week 14: Functions & Modularization (Defining functions, parameters, return values, scope).
+Week 15: Module Imports & Standard Library (Importing built-in math, random, datetime).
+Week 16: TERM 2 PROJECT (Develop an interactive CLI 'Quiz System' with dictionaries).
+
+[TERM 3: FILE I/O, ERROR HANDLING & DATA ANALYTICS]
+Week 17: File I/O Operations (Reading and writing text files safely with 'with open()').
+Week 18: Structured Data Processing (Parsing CSV files using Python's csv module).
+Week 19: Exception & Error Handling (Handling runtime errors with try/except/finally).
+Week 20: Data Analysis Fundamentals (Calculating mean, median, mode via Python code).
+Week 21: Introduction to OOP (Class definitions, constructors __init__, instances).
+Week 22: OOP Instance Methods (Encapsulating logic with class methods and self).
+Week 23: Data Validation Pipelines (Sanitizing messy inputs, missing values).
+Week 24: TERM 3 PROJECT (Build a 'Sales Analytics System' reading raw CSV files).
+
+--------------------------------------------------------------------------------
+SSS2: WEB ENGINEERING, DATABASE DESIGN & ORM
+Assigned Software: HTML5/CSS3/JS, Python 3.x, SQLite, SQLAlchemy / Django ORM
+--------------------------------------------------------------------------------
+[TERM 1: ADVANCED FRONTEND & JAVASCRIPT BASICS]
+Week 1: Modern CSS Framework Principles (CSS Grid, CSS variables, media queries).
+Week 2: Introduction to JavaScript (Variables let/const, browser console, types).
+Week 3: JS Control Flow & Functions (Conditionals, loops, standard and arrow functions).
+Week 4: DOM Manipulation (Selecting HTML nodes, changing content/styles dynamically).
+Week 5: Event Listeners & Interactive Nodes (Binding click, submit, input events).
+Week 6: Form Validation via JavaScript (Validating forms with regular expressions).
+Week 7: Asynchronous JavaScript Mechanics (JSON parsing, localStorage persistence).
+Week 8: TERM 1 PROJECT (Construct an interactive 'Task Management Dashboard').
+
+[TERM 2: SQL & RELATIONAL DATABASE ARCHITECTURE]
+Week 9: Relational Database Engine (SQLite CLI tools and file structures).
+Week 10: Data Definition Language (CREATE TABLE, field types, constraints, keys).
+Week 11: Data Manipulation Language (INSERT INTO, UPDATE, DELETE FROM statements).
+Week 12: Data Querying Language (SELECT, WHERE, ORDER BY, LIMIT clauses).
+Week 13: Aggregations & Grouping (COUNT, SUM, AVG, GROUP BY, HAVING).
+Week 14: Relational Database Joins (Querying multiple tables with INNER/LEFT JOIN).
+Week 15: Schema Normalization Theory (Applying 1NF, 2NF, and 3NF rules).
+Week 16: TERM 2 PROJECT (Design a normalized 3-table 'E-Commerce Database Schema').
+
+[TERM 3: PYTHON DATABASE INTEGRATION & ORM MECHANICS]
+Week 17: Python DB-API Interface (Connecting Python to SQLite via sqlite3 library).
+Week 18: Parameterized Queries (Defending against SQL Injection using ? bindings).
+Week 19: Database Transaction Management (Handling transactions with commit/rollback).
+Week 20: Object-Relational Mapping (Mapping Python classes to relational tables).
+Week 21: SQLAlchemy Core & Declarative Base (Defining ORM models and relationships).
+Week 22: ORM Session Operations (Executing CRUD actions using ORM sessions).
+Week 23: Database Migrations & Relationships (One-to-Many and Many-to-Many models).
+Week 24: TERM 3 PROJECT (Build a Python 'School Portal Engine' using SQLAlchemy ORM).
+
+--------------------------------------------------------------------------------
+SSS3: BACKEND SYSTEMS, SECURITY & CAPSTONE ARCHITECTURE
+Assigned Software: Python, Django / Flask, SQLite, Git, Postman / HTTP Client
+--------------------------------------------------------------------------------
+[TERM 1: BACKEND WEB FRAMEWORK ARCHITECTURE]
+Week 1: Web Server Architecture (HTTP request/response lifecycles, REST codes).
+Week 2: Backend Frameworks (Flask/Django initialization, app routing, view execution).
+Week 3: Routing & Request Parameters (Mapping URLs to Python functions; parameters).
+Week 4: Server-Side Templating (Rendering dynamic HTML with Jinja template syntax).
+Week 5: Form Data & File Handling (Processing POST requests, static uploads).
+Week 6: Application Authentication (Password hashing, Bcrypt, user sessions, cookies).
+Week 7: Middleware & Access Control (Securing web routes, user authorization).
+Week 8: TERM 1 PROJECT (Develop a secure 'Student Result Verification Portal').
+
+[TERM 2: SOFTWARE ENGINEERING PRACTICES & SECURITY]
+Week 9: Version Control Fundamentals (Git setup, staging, committing, log history).
+Week 10: Git Branching & Merging (Branch workflows, resolving merge conflicts).
+Week 11: Software Testing Methodologies (Unit testing using Python's unittest module).
+Week 12: Application Security Essentials (Mitigating OWASP vulnerabilities: SQLi, XSS, CSRF).
+Week 13: REST API Design Principles (Building JSON endpoints: GET, POST, PUT, DELETE).
+Week 14: System Performance & Caching (Database query profiling, indexing rules).
+Week 15: Software Project Planning (MVC/MVT patterns, requirement specifications).
+Week 16: TERM 2 PROJECT (Refactor portal into a REST API with tests and security checks).
+
+[TERM 3: SENIOR CAPSTONE PROJECT & EXAMINATION PREP]
+Week 17: Capstone System Specification (Project scope, schemas, wireframes, endpoints).
+Week 18: Capstone Core Backend Development (Models, authentication, ORM integration).
+Week 19: Capstone Frontend & API Integration (Connecting JS frontend to REST APIs).
+Week 20: Capstone System Testing & Bug Remediation (End-to-end testing, security audits).
+Week 21: Technical System Documentation (Writing setup guides, ERD diagrams, docs).
+Week 22: WAEC/NECO Exam Review I (Data processing theory, binary logic, database review).
+Week 23: WAEC/NECO Exam Review II (Practical lab mocks, programming, troubleshooting).
+Week 24: TERM 3 CAPSTONE DEFENSE (Present full-stack 'School Management System').
+================================================================================

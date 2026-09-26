@@ -1,0 +1,143 @@
+================================================================================
+FULL-SESSION PRACTICAL DIGITAL SKILLS CURRICULUM (PRIMARY 3 - PRIMARY 6)
+24 WEEKS TOTAL | 3 TERMS PER SESSION | 8 WEEKS PER TERM
+RESOURCE CONSTRAINTS: 20 COMPUTERS, 2 TEACHERS, 200+ STUDENTS (OFFLINE)
+WEEKLY ALLOCATION: 80 MINUTES PER CLASS | LAB ROTATION: 3-STUDENT POD SYSTEM
+================================================================================
+
+--------------------------------------------------------------------------------
+PRIMARY 3: COMPUTER FUNDAMENTALS & DIGITAL LITERACY
+Assigned Software: Tux Typing, WordPad, Paint & LibreOffice Writer (Free & Offline)
+--------------------------------------------------------------------------------
+[TERM 1: HARDWARE BASICS & TOUCH TYPING MECHANICS]
+Week 1: Computer Hardware Overview (Monitor, CPU, keyboard, mouse, UPS setup).
+Week 2: System Startup & Shutdown (Safe power procedures, desktop navigation).
+Week 3: Mouse Mastery (Left-click, right-click, double-click, drag-and-drop).
+Week 4: Keyboard Geography - Home Row (Hand placement on A-S-D-F and J-K-L-;).
+Week 5: Keyboard Geography - Top & Bottom Rows (Reaching upper/lower keys, Spacebar).
+Week 6: Number Row & Special Keys (Enter, Backspace, Caps Lock, Shift).
+Week 7: Typing Speed & Accuracy (Continuous sentence drills in Tux Typing).
+Week 8: TERM 1 PROJECT (Timed touch-typing evaluation & desktop file launch test).
+
+[TERM 2: WORD PROCESSING & DOCUMENT DESIGN]
+Week 9: Intro to WordPad (Opening word processors, cursor control, basic typing).
+Week 10: Text Selection & Formatting (Font styles, font sizing, Bold, Italics, Underline).
+Week 11: Color & Alignment Controls (Text coloring, highlight, left/center/right alignment).
+Week 12: Lists & Bullet Points (Creating numbered lists and bulleted inventories).
+Week 13: File Management & Folders (Creating desktop folder 'P3_Work', naming rules).
+Week 14: Saving & Opening Files (Saving files into folders, opening existing documents).
+Week 15: Document Layout Practice (Combining formatting, bullets, and titles).
+Week 16: TERM 2 PROJECT (Type and format a 1-page 'My School Routine' document).
+
+[TERM 3: BASIC GRAPHICS & DOCUMENT MEDIA]
+Week 17: Intro to Digital Painting (Opening Paint, canvas setup, color picking).
+Week 18: Line & Shape Tools (Drawing geometric shapes, lines, and simple borders).
+Week 19: Fill Tools & Color Theory (Primary/secondary colors, bucket fill mechanics).
+Week 20: Adding Art to Documents (Inserting saved pictures into text documents).
+Week 21: Table Basics (Creating simple 2-column tables in LibreOffice Writer).
+Week 22: Keyboard Shortcuts (Mastering Ctrl+C, Ctrl+V, and Ctrl+S commands).
+Week 23: Digital Ethics & Lab Rules (Equipment handling, posture, digital manners).
+Week 24: TERM 3 PROJECT (Create an illustrated story card with embedded Paint art).
+
+--------------------------------------------------------------------------------
+PRIMARY 4: DIGITAL ART, DESIGN & DOCUMENT PRODUCTION
+Assigned Software: Tux Paint & LibreOffice Writer (Free & Offline)
+--------------------------------------------------------------------------------
+[TERM 1: DIGITAL ART & GRAPHIC DESIGN FOUNDATIONS]
+Week 1: Tux Paint Interface (Canvas layout, tool selectors, color palette, undo).
+Week 2: Lines, Brushes & Shapes (Building architectural shapes like houses and trees).
+Week 3: Color Theory & Fill Limits (Border enclosures and Fill Bucket logic).
+Week 4: Visual Stamps & Alignment (Scaling, flipping, and placing stamp objects).
+Week 5: Magic Tools & Filters (Applying Grass, Brick, Rainbow, and blur effects).
+Week 6: Typography in Art (Selecting fonts, sizing titles, placing labels over art).
+Week 7: Poster Layout Principles (Margins, balance, white space, visual contrast).
+Week 8: TERM 1 PROJECT (Design a printable A4 'Classroom Rules' poster).
+
+[TERM 2: INTERMEDIATE WORD PROCESSING]
+Week 9: LibreOffice Writer Intro (Document navigation, ruler settings, typing).
+Week 10: Advanced Text Formatting (Line spacing, paragraph indent, font hierarchies).
+Week 11: Inserting & Formatting Tables (Creating class timetables using tables).
+Week 12: Table Styling (Cell shading, border colors, text alignment inside cells).
+Week 13: Image Embedding (Inserting illustrations and adjusting image dimensions).
+Week 14: Image Text Wrapping (Square, Tight, and Behind Text wrapping modes).
+Week 15: Page Layout & Borders (Margins, orientation, and decorative borders).
+Week 16: TERM 2 PROJECT (Produce a 2-page 'Animal Fact Sheet' with tables and media).
+
+[TERM 3: PUBLISHING & OFFLINE RESEARCH]
+Week 17: Offline Research Skills (Navigating Kiwix encyclopedias and reading indexes).
+Week 18: Information Extraction (Taking bulleted notes from offline articles).
+Week 19: Header & Footer Design (Adding page numbers, titles, and dates to headers).
+Week 20: Multi-Column Layouts (Formatting document text into 2-column newspaper layout).
+Week 21: Document Proofing (Spellcheck usage, synonym lookup, grammar editing).
+Week 22: Print Setup & Exporting (Exporting to PDF format and print configuration).
+Week 23: Cyber Awareness (File safety, keeping passwords private, hardware care).
+Week 24: TERM 3 PROJECT (Research 'Nigerian Geography' and build a 2-page PDF newsletter).
+
+--------------------------------------------------------------------------------
+PRIMARY 5: VISUAL PROGRAMMING & BLOCK LOGIC I
+Assigned Software: Scratch 3.0 Desktop (Free, Open-Source & Offline)
+--------------------------------------------------------------------------------
+[TERM 1: ANIMATION & SEQUENCE LOGIC]
+Week 1: Scratch Interface (Sprites, Backdrops, Stage grid, Green Flag triggers).
+Week 2: X/Y Cartesian Coordinates (Motion blocks: 'go to x: y:', 'glide to').
+Week 3: Keyboard Event Controls (Mapping arrow keys to sprite directional motion).
+Week 4: Sequential Logic & Mazes (Step-by-step algorithms; drawing maze backdrops).
+Week 5: Loops & Costume Switching ('forever' vs 'repeat' loops, walking animations).
+Week 6: Dialogue & Speech Mechanics (Speech bubbles 'say for 2 secs', audio delays).
+Week 7: Scene Transitions (Backdrop switching blocks triggered by events).
+Week 8: TERM 1 PROJECT (Code an animated 2-character story about environment cleanup).
+
+[TERM 2: SENSING LOGIC & DYNAMIC INTERACTION]
+Week 9: Collision Sensing ('touching color?' and 'touching sprite?' sensors).
+Week 10: Conditional Logic ('if-then' statements, triggering actions on impact).
+Week 11: Multi-Branching Logic ('if-then-else' dual-outcome conditional blocks).
+Week 12: Sound & Audio Effects (Importing sounds, pitch control, volume blocks).
+Week 13: Sprite Drawing Tools (Using Pen extension to draw shapes programmatically).
+Week 14: User Mouse Interaction ('mouse_x', 'mouse_y', 'follow mouse-pointer').
+Week 15: Interactive Quiz Basics ('ask and wait' input blocks, answer checking).
+Week 16: TERM 2 PROJECT (Code a maze game where touching walls resets position).
+
+[TERM 3: GAME DESIGN & PHYSICS CONCEPTS]
+Week 17: Gravity & Jumping Mechanics (Simulating jump physics using Y-velocity).
+Week 18: Scrolling Backgrounds (Moving backdrop elements for motion simulation).
+Week 19: Enemy Patrol AI (Programming automated left-right bouncing enemy movement).
+Week 20: Health & Lives System (Creating custom sprite health states via costumes).
+Week 21: Win/Loss Conditions (Coding explicit victory and game-over screens).
+Week 22: User Interface Design (Placing start buttons, title screens, instructions).
+Week 23: Code Optimization (Cleaning up redundant blocks and script organization).
+Week 24: TERM 3 PROJECT (Build a 1-level 'Platformer Game' with jumping and enemies).
+
+--------------------------------------------------------------------------------
+PRIMARY 6: ADVANCED GAME ARCHITECTURE & SYSTEMS
+Assigned Software: Scratch 3.0 Desktop (Free, Open-Source & Offline)
+--------------------------------------------------------------------------------
+[TERM 1: VARIABLES, TIMERS & ARCADE PHYSICS]
+Week 1: Review of Core Block Logic (Multi-scene flow, stage state resets).
+Week 2: Broadcast Communications (Inter-sprite messaging: 'broadcast' & 'receive').
+Week 3: Dynamic Variables (Creating variables, dynamic score updates '+1').
+Week 4: Countdown Timers (Decrementing timers '-1' and time-limit triggers).
+Week 5: Pseudo-Randomization ('pick random X to Y' for unpredictable elements).
+Week 6: Falling Object Mechanics (Resetting falling sprites from random top X positions).
+Week 7: Game Loop Assembly (Combining inputs, timers, dynamic score, collisions).
+Week 8: TERM 1 PROJECT (Code a 'Catching Falling Fruit' game with timer and score).
+
+[TERM 2: ADVANCED DATA & ARCADE SYSTEMS]
+Week 9: Sprite Cloning Mechanics ('create clone of myself', 'when I start as clone').
+Week 10: Managing Clone Lifecycles (Deleting clones on collision to prevent lag).
+Week 11: High Score Tracking (Saving persistent records via dynamic comparisons).
+Week 12: Projectile Physics (Coding shooting mechanics from player sprite).
+Week 13: Multi-Level Progression (Increasing difficulty when score hits thresholds).
+Week 14: Lists & Inventory Arrays (Creating lists to hold multiple data items).
+Week 15: List Operations (Adding, deleting, and searching list entries programmatically).
+Week 16: TERM 2 PROJECT (Code a space shooter firing laser clones at falling asteroids).
+
+[TERM 3: EDUCATIONAL SYSTEMS & CAPSTONE PROJECT]
+Week 17: Quiz System Architecture (Using lists to store questions and check answers).
+Week 18: Score Analysis Logic (Calculating percentage scores inside variables).
+Week 19: Custom Block Creation (Building reusable functions with 'make a block').
+Week 20: Project UI/UX Refinement (Designing start screens, help menus, exit buttons).
+Week 21: User Testing & Debugging (Peer testing, identifying bugs, logic fixes).
+Week 22: Code Documentation (Adding script comments to explain project logic).
+Week 23: Portfolio Assembly (Organizing projects into a final showcase folder).
+Week 24: TERM 3 CAPSTONE PROJECT (Build a complete 'Interactive Educational Game').
+================================================================================
