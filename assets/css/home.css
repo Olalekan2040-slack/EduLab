@@ -1109,6 +1109,80 @@
   transition: gap .2s
 }
 
+/* ══ VISION & MISSION ══ */
+.vm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 52px
+}
+
+@media(max-width:780px) {
+  .vm-grid {
+    grid-template-columns: 1fr
+  }
+}
+
+.vm-card {
+  background: var(--sand);
+  border: 1.5px solid var(--border);
+  border-left: 4px solid var(--sky);
+  border-radius: var(--r2);
+  padding: 36px 34px;
+  transition: all .3s
+}
+
+.vm-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh2)
+}
+
+.vm-card.vm-mission {
+  border-left-color: var(--gold)
+}
+
+.vm-ico {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--ice);
+  border: 1px solid #BFEDE4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  margin-bottom: 20px
+}
+
+.vm-card.vm-mission .vm-ico {
+  background: rgba(219, 138, 31, .1);
+  border-color: rgba(219, 138, 31, .25);
+  color: var(--gold)
+}
+
+.vm-eyebrow {
+  font-family: var(--font-m);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 14px
+}
+
+.vm-card.vm-mission .vm-eyebrow {
+  color: var(--gold)
+}
+
+.vm-text {
+  font-family: var(--font-h);
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--navy);
+  line-height: 1.6
+}
+
 /* ══ FORM ══ */
 .form-bg {
   background: var(--white)
